@@ -4,26 +4,24 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vanilla App Template</title>
+    <title>ArtistHub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,700;1,700&family=IBM+Plex+Sans:ital,wdth,wght@0,75..100,100..700;1,75..100,100..700&family=Roboto:ital,wght@0,700;1,700&display=swap" 
+rel="stylesheet">
     <link rel="stylesheet" href="./css/styles.css" />
+
   </head>
   <body>
-    <form class="form">
-      <label>
-        <input
-          type="text"
-          name="search-text"
-          placeholder="Search images..."
-          required
-        />
-      </label>
-      <button type="submit">Search</button>
-    </form>
-
-    <ul class="gallery"></ul>
-    <span class="loader is-hidden">Loading...</span>
-    <button type="button" class="load-more boost">Load more</button>
-
+    <load src="./partials/header.html" />
+    <main>
+      <load src="./partials/hero.html" />
+      <load src="./partials/artist.html" />
+      <load src="./partials/artistwindow.html" />
+      <load src="./partials/about.html" />
+      <load src="./partials/feedback.html" />
+      <load src="./partials/modulewindow.html" />
+    </main>
+    <load src="./partials/footer.html" />
     <script type="module" src="./main.js"></script>
-  </body>
 </html>
