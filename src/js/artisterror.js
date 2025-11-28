@@ -17,7 +17,7 @@ export function hideArtistsLoadMoreButton() {
 export function clearArtistsList() { 
     artistsList.innerHTML = ''; 
 }
-// n;kmnk;
+
 function createGenreElements(genres) {
     if (!Array.isArray(genres) || genres.length === 0) {
         return ''; 
