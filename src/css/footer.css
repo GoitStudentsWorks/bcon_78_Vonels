@@ -1,0 +1,49 @@
+@media only screen and (min-width: 320px) {
+  .footer-content {
+    min-width: 288px;
+    height: auto;
+    padding-top: 48px;
+    padding-right: 16px;
+    padding-bottom: 48px;
+    padding-left: 16px;
+  }
+  .footer-content-logo {
+    min-width: 84px;
+    margin-top: 0;
+    margin-right: 102px;
+    margin-bottom: 32px;
+    margin-left: 102px;
+  }
+  .footer-content-menu-links {
+    display: flex;
+  }
+  .footer-content-item {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #fff;
+  }
+  .footer-end {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    min-width: 288px;
+    max-height: auto;
+    margin-bottom: 24px;
+    padding-bottom: 48px;
+  }
+
+  .footer-end-social-links {
+    display: flex;
+    margin-right: 52px;
+    margin-bottom: 32px;
+    margin-left: 52px;
+  }
+
+  .footer-end-text {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #fff;
+  }
+}
