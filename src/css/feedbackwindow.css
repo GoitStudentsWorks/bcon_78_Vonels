@@ -1,0 +1,21 @@
+.submit-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 864px;
+  border-radius: 16px;
+  padding: 64px;
+  max-height: 688px;
+  background: var(--color-scheme-1-background);
+}
+
+.submit-title {
+  font-family: var(--second-family);
+  font-weight: 700;
+  font-size: 60px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--color-scheme-1-text);
+}
