@@ -62,6 +62,10 @@
   --third-family: "Roboto", sans-serif;
 }
 
+body {
+	background-color: var(--color-neutral-darkest);
+	color: white;
+}
 
 .container {
   max-width: 320px;

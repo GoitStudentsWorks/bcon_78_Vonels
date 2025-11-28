@@ -25,7 +25,7 @@ function createGenreElements(genres) {
 
     const tags = genres.map(genre => {
         return `<span class="genre-tag">${genre}</span>`;
-    }).join('');
+    }).join(' ');
     
     return `<div class="artist-genres">${tags}</div>`;
 }
@@ -55,6 +55,8 @@ export function createArtistCards(artists) {
                         data-artist-id="${artist._id}"
                     >
                         Learn More
+                        
+
                     </button>
                 </li>
             `;
