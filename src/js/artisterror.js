@@ -29,7 +29,7 @@ function createGenreElements(genres) {
     .map(genre => {
       return `<span class="genre-tag">${genre}</span>`;
     })
-    .join('');
+    .join(' ');
 
   return `<div class="artist-genres">${tags}</div>`;
 }
@@ -64,7 +64,9 @@ export function createArtistCards(artists) {
                         data-artist-id="${artist._id}"
                     >
                         Learn More
-                        
+                        <svg class="model-open-btm-icon" width="8" height="14">
+                            <use href="../img/sprite.svg#icon-con"></use>
+                        </svg>
 
                     </button>
                 </li>
