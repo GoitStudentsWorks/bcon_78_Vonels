@@ -1,13 +1,15 @@
 import Swiper from 'swiper/bundle';
-
-const BASE_URL = 'https://sound-wave.b.goit.study/api';
-const FEEDBACKS_ENDPOINT = '/feedbacks';
-const API_URL = `${BASE_URL}${FEEDBACKS_ENDPOINT}`;
+// https://sound-wave.b.goit.study/api-docs/
+const BASE_URL = 'https://sound-wave.b.goit.study';
+// const FEEDBACKS_ENDPOINT = '/api/feedbacks';
+const API_URL = `${BASE_URL}/api/feedbacks`;
 const STORAGE_KEY = 'project-feedbacks'; // Додано ключ Local Storage
-
 const swiperWrapper = document.querySelector('.swiper-wrapper');
 const submitButton = document.querySelector('.feedback-submit-btn');
-
+// console.log(API_URL);
+// {
+//   FEEDBACKS_ENDPOINT;
+// }
 function createFeedbackMarkup({ name, feedback, rating }) {
   const roundedRating = Math.round(rating);
   const starsMarkup = '⭐'.repeat(roundedRating);
