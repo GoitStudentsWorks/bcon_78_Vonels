@@ -1,12 +1,12 @@
 import Swiper from 'swiper/bundle';
-// https://sound-wave.b.goit.study/api-docs/
+
 const BASE_URL = 'https://sound-wave.b.goit.study';
 // const FEEDBACKS_ENDPOINT = '/api/feedbacks';
 const API_URL = `${BASE_URL}/api/feedbacks`;
-const STORAGE_KEY = 'project-feedbacks'; // Додано ключ Local Storage
+const STORAGE_KEY = 'project-feedbacks';
 const swiperWrapper = document.querySelector('.swiper-wrapper');
 const submitButton = document.querySelector('.feedback-submit-btn');
-// console.log(API_URL);
+
 // {
 //   FEEDBACKS_ENDPOINT;
 // }
@@ -87,18 +87,33 @@ async function updateFeedbacks() {
     initSwiper(feedbacksToRender.length);
   } catch (error) {
     console.error('Помилка при оновленні відгуків:', error);
-    swiperWrapper.innerHTML = `<p class="error-message">Не вдалося завантажити відгуки. Спробуйте пізніше.</p>`;
+
+    // ПРИМУСОВЕ ЗАВАНТАЖЕННЯ Local Storage ПРИ ПОМИЛЦІ API
+    const localData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+    if (localData.length > 0) {
+      const feedbacksToRender = localData.slice(0, 10);
+      const markup = feedbacksToRender.map(createFeedbackMarkup).join('');
+
+      swiperWrapper.innerHTML = markup;
+      initSwiper(feedbacksToRender.length);
+    } else {
+      swiperWrapper.innerHTML = `<p class="error-message">Не вдалося завантажити відгуки. Спробуйте пізніше.</p>`;
+    }
   }
+
+  // catch (error) {
+  //   console.error('Помилка при оновленні відгуків:', error);
+  //   swiperWrapper.innerHTML = `<p class="error-message">Не вдалося завантажити відгуки. Спробуйте пізніше.</p>`;
+  // }
 }
 
 // -----------------------------------------------------------------
-// 2. ЛОГІКА МОДАЛЬНОГО ВІКНА ТА СИНХРОНІЗАЦІЇ
+// 2. ЛОГІКА МОДАЛЬНОГО ВІКНА
 // -----------------------------------------------------------------
 
-// Зробити функцію updateFeedbacks доступною глобально для feedbackwindow.js
 window.updateFeedbacks = updateFeedbacks;
 
-// Імпорт функції відкриття модального вікна
 import { openModal } from '../js/feedbackwindow';
 
 if (submitButton) {

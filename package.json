@@ -23,6 +23,7 @@
     "izitoast": "^1.4.0",
     "jquery": "^3.7.1",
     "raty": "^1.0.5",
+    "raty-js": "^4.3.0",
     "simplelightbox": "^2.14.3",
     "swiper": "^12.0.3",
     "vite-plugin-full-reload": "^1.2.0",
