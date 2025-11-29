@@ -2,32 +2,29 @@
   <!-- ===img-about-section=== -->
   <picture class="about-picture">
     <!-- ===WebP-laptop=== -->
-    <source srcset="" media="(min-width: 1440px)" type="image/webp" />
-    <!-- ===WebP-tablet=== -->
-    <source srcset="" media="(min-width: 768px)" type="image/webp" />
-    <!-- ===WebP-phone=== -->
-    <source srcset="" width="288" height="169" type="image/webp" />
-    <!-- ===jpeg-for-laptop=== -->
     <source
-      srcset="
-        ../img/team/about-laptop.jpg    1x,
-        ../img/team/about-laptop@2x.jpg 2x
-      "
+      srcset="../img/team@1x.webp 1x, ../img/team@2x.webp 2x"
       media="(min-width: 1440px)"
+      type="image/webp"
     />
-    <!-- ===jpeg-for-tablet=== -->
+    <!-- ===WebP-tablet=== -->
     <source
-      srcset="
-        ../img/team/about-tablet.jpg    1x,
-        ../img/team/about-tablet@2x.jpg 2x
-      "
+      srcset="../img/team@1x.webp 1x, ../img/team@2x.webp 2x"
       media="(min-width: 768px)"
+      type="image/webp"
     />
-    <!-- ===jpeg-for-phone=== -->
+    <!-- ===WebP-phone=== -->
     <source
-      srcset="../img/team/about-phone.jpg 1x, ../img/team/about-phone@2x.jpg 2x"
+      srcset="../img/teamphone@1x.webp 1x, ../img/teamphone@2x.webp 2x"
+      type="image/webp"
     />
-    <img src="../img/team/about-laptop.jpg" alt="team-photo" />
+    <!-- ===jpeg-for-laptop=== -->
+    <source srcset="" media="(min-width: 1440px)" />
+    <!-- ===jpeg-for-tablet=== -->
+    <source srcset="" media="(min-width: 768px)" />
+    <!-- ===jpeg-for-phone=== -->
+    <source srcset="" />
+    <img src="" alt="team-photo" />
   </picture>
   <div class="container-about-inf">
     <svg class="svg-icon-about"><use href="../img/sprite.svg"></use></svg>
