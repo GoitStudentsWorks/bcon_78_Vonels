@@ -97,7 +97,7 @@ async function updateFeedbacks() {
 window.updateFeedbacks = updateFeedbacks;
 
 // Імпорт функції відкриття модального вікна
-import { openModal } from './feedbackwindow';
+import { openModal } from '../js/feedbackwindow';
 
 if (submitButton) {
   submitButton.addEventListener('click', openModal);
