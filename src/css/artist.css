@@ -2,7 +2,6 @@
 body {
   background-color: black;
   color: white;
-  padding: 112px 64px;
 }
 
 .section-title {
@@ -70,7 +69,15 @@ body {
 
 @media only screen and (min-width: 320px) {
     .artist-section {
-        padding: 64px 16px;
+        padding: 64px 0;
+    }
+
+    .model-btm-icon {
+        margin-left: 12px;
+    }
+
+    .model-open-btm-icon {
+        margin-left: 12px;
     }
 
     .section-subtitle {
@@ -145,11 +152,17 @@ body {
     .scroll-btm-icon {
         color: var(--color-white);
     }
+
+    /* .artist-genres {
+        display: flex;
+        gap: 16px;
+    } */
+    
 }
 
 @media only screen and (min-width: 768px) {
     .artist-section {
-        padding: 64px 32px;
+        padding: 64px 0;
     }
 
     .section-subtitle {
@@ -185,7 +198,7 @@ body {
 
 @media only screen and (min-width: 1440px) {
     .artist-section {
-        padding: 112px 64px;
+        padding: 112px 0;
     }
 
     .section-subtitle {
