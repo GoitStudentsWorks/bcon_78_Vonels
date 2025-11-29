@@ -3,28 +3,70 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 864px;
+  width: 320px;
   border-radius: 16px;
-  padding: 64px;
-  max-height: 688px;
+  padding: 64px 16px;
+  max-height: 568px;
   background: var(--color-scheme-1-background);
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
   display: none;
+  z-index: 100;
 }
 
-.submit-modal.is-open {
+@media screen and (min-width: 768px) {
+  .submit-modal {
+    width: 704px;
+    padding: 64px 32px;
+    max-height: 688px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .submit-modal {
+    width: 864px;
+    padding: 64px;
+    max-height: 688px;
+  }
+}
+
+.submit-feedback {
+  background: rgba(0, 0, 0, 0.25);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  z-index: 90;
+}
+
+.is-open {
   display: block;
 }
 
 .submit-title {
   font-family: var(--second-family);
   font-weight: 700;
-  font-size: 60px;
-  line-height: 1.2;
+  font-size: 24px;
+  line-height: 1.3;
   letter-spacing: -0.01em;
   text-align: center;
   color: var(--color-scheme-1-text);
-  margin-bottom: 48px;
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .submit-title {
+    font-size: 44px;
+    line-height: 1.2;
+    margin-bottom: 48px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .submit-title {
+    font-size: 60px;
+  }
 }
 .submit-button_modal {
   position: absolute;
@@ -53,40 +95,77 @@
   border: 1px solid var(--opacity-white-20);
   border-radius: 12px;
   padding: 8px 12px;
-  width: 736px;
+  width: 288px;
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 18px;
   line-height: 1.5;
   color: var(--opacity-white-60);
   background: var(--opacity-transparent);
+}
+
+@media screen and (min-width: 768px) {
+  #username {
+    width: 640px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  #username {
+    width: 736px;
+  }
 }
 
 #message {
   border: 1px solid var(--opacity-white-20);
   border-radius: 12px;
   padding: 12px;
-  width: 736px;
+  width: 288px;
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 18px;
   line-height: 1.5;
   color: var(--opacity-white-60);
   background: var(--opacity-transparent);
-  padding-bottom: 141px;
+  padding-bottom: 91px;
+}
+
+@media screen and (min-width: 768px) {
+  #message {
+    width: 640px;
+    padding-bottom: 141px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  #message {
+    width: 736px;
+  }
 }
 
 .form-group {
-  margin-bottom: 24px;
+  margin-bottom: 32px;
+}
+
+@media screen and (min-width: 768px) {
+  .form-group {
+    margin-bottom: 24px;
+  }
 }
 
 .rating-group {
-  margin-bottom: 24px;
+  margin-bottom: 32px;
+}
+
+@media screen and (min-width: 768px) {
+  .rating-group {
+    margin-bottom: 24px;
+  }
 }
 
 .submit-feedback_button {
   border-radius: 12px;
-  padding: 10px 24px;
+  padding: 10px 114px;
   box-shadow: 0 1px 2px 0 var(--opacity-neutral-darkest-5),
     inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2),
     inset 0 0 0 1px var(--opacity-neutral-darkest-15),
@@ -100,4 +179,26 @@
   color: var(--color-white);
   margin: 0 auto;
   border: none;
+}
+
+@media screen and (min-width: 768px) {
+  .submit-feedback_button {
+    padding: 10px 140px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .submit-feedback_button {
+    padding: 10px 24px;
+  }
+}
+
+#user-rating-input {
+  display: flex;
+  gap: 2px;
+}
+
+#user-rating-input img {
+  width: 28px;
+  height: 28px;
 }
