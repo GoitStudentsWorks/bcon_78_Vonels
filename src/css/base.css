@@ -63,7 +63,7 @@
 }
 
 body {
-  background-color: var(--color-neutral-darkest);
+  background-color: black;
 }
 
 .container {
@@ -71,7 +71,7 @@ body {
   padding-left: 16px;
   padding-right: 16px;
   margin-left: auto;
-  margin-top: auto;
+  margin-right: auto;
 }
 
 @media only screen and (min-width: 768px) {
