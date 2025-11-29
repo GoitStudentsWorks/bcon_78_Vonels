@@ -11,7 +11,7 @@ import {
   clearArtistsList,
 } from './artisterror';
 // svvvsddsv
-const BASE_URL = 'https://sound-wave.b.goit.study';
+const BASE_URL = 'https://sound-wave.b.goit.study'; 
 const PER_PAGE = 8;
 
 export async function getArtists(page = 1) {

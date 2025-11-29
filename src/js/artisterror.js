@@ -2,6 +2,8 @@ const artistsList = document.querySelector('.artists-list');
 const loader = document.querySelector('.artists-loader');
 const loadMoreBtn = document.querySelector('.artists-load-more-btn');
 
+import {init} from './bodwindow';
+
 export function showArtistsLoader() {
   loader.classList.remove('is-hidden');
 }
@@ -56,7 +58,8 @@ export function createArtistCards(artists) {
                         : ''
                     }
                     
-                    <button 
+                    <button
+                        type="button"
                         class="learn-more-btn"
                         data-artist-id="${artist._id}"
                     >
@@ -69,5 +72,14 @@ export function createArtistCards(artists) {
     })
     .join('');
 
-  artistsList.insertAdjacentHTML('beforeend', markup);
+    artistsList.insertAdjacentHTML('beforeend', markup);
+
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('learn-more-btn')) {
+            const actorId = e.target.dataset.artistId;
+            init(actorId);
+  }
+});
 }
+
+ 
