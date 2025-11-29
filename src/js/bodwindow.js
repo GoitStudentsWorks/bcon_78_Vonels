@@ -197,13 +197,13 @@ function createAlbumList(actorInfo) {
 }
 
 /* ------------------ INIT CALL ------------------ */
-document.addEventListener('click', event => {
-  const btn = event.target.closest('.learn-more-btn');
-  const container = document.querySelector('.modal-overlay');
-  container.classList.add('is-open');
-  if (!btn) return;
+// document.addEventListener('click', event => {
+//   const btn = event.target.closest('.learn-more-btn');
+//   const container = document.querySelector('.modal-overlay');
+//   container.classList.add('is-open');
+//   if (!btn) return;
 
-  const artistId = btn.dataset.artistId;
-  console.log(btn.dataset.artistId);
-  init(artistId);
-});
+//   const artistId = btn.dataset.artistId;
+//   console.log(btn.dataset.artistId);
+//   init(artistId);
+// });
