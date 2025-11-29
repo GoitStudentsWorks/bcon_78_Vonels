@@ -1,0 +1,118 @@
+@media only screen and (min-width: 375px) {
+  .is-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+  }
+
+  .feedback-section {
+    background-color: #000;
+    padding: 60px 0;
+  }
+  .feedback-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 40px 20px;
+    color: #fff;
+    background: var(--color-scheme-1-background);
+    border-radius: 8px;
+  }
+  .swiper-wrapper {
+    color: #fff;
+  }
+  /* Стилізація ЗІРОЧОК  */
+  .star-rating-container {
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+
+  .feedback-text {
+    font-size: 18px;
+    line-height: 1.4;
+    margin-bottom: 15px;
+  }
+
+  .feedback-author {
+    font-size: 16px;
+    color: #ccc;
+    margin-bottom: 30px;
+  }
+
+  .feedback-submit-btn {
+    padding: 12px 30px;
+    background-color: #8a2be2;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .feedback-submit-btn:hover {
+    background-color: #6a0dad;
+  }
+  .feedback-slider {
+    color: #fff;
+  }
+  /* Обгортка для кнопок та пагінації */
+  .slider-navigation-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-top: 40px;
+    color: white;
+  }
+  .feedback-prev-btn,
+  .feedback-next-btn {
+    width: 44px;
+    height: 44px;
+    background-color: #0d0d0d;
+    border: 1px solid #444;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .feedback-prev-btn:hover,
+  .feedback-next-btn:hover {
+    background-color: #1a1a1a;
+  }
+
+  /* --- Пагінація (3 точки) --- */
+
+  .feedback-pagination.swiper-pagination-bullets {
+    position: static;
+    transform: none;
+    display: flex;
+    gap: 8px;
+    width: auto;
+  }
+
+  .feedback-pagination .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    background: #444;
+    opacity: 1;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+  }
+
+  .feedback-pagination .swiper-pagination-bullet-active {
+    background: #fff;
+  }
+}
