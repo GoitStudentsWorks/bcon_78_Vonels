@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+  </head>
+  <body>
+    <div class="about-container">
+      <!-- ===img-about-section=== -->
+      <picture class="about-picture">
+        <!-- ===WebP-laptop=== -->
+        <source srcset="" media="(min-width: 1440px)" type="image/webp" />
+        <!-- ===WebP-tablet=== -->
+        <source srcset="" media="(min-width: 768px)" type="image/webp" />
+        <!-- ===WebP-phone=== -->
+        <source srcset="" width="288" height="169" type="image/webp" />
+        <!-- ===jpeg-for-laptop=== -->
+        <source
+          srcset="
+            ../img/team/about-laptop.jpg    1x,
+            ../img/team/about-laptop@2x.jpg 2x
+          "
+          media="(min-width: 1440px)"
+        />
+        <!-- ===jpeg-for-tablet=== -->
+        <source
+          srcset="
+            ../img/team/about-tablet.jpg    1x,
+            ../img/team/about-tablet@2x.jpg 2x
+          "
+          media="(min-width: 768px)"
+        />
+        <!-- ===jpeg-for-phone=== -->
+        <source
+          srcset="
+            ../img/team/about-phone.jpg    1x,
+            ../img/team/about-phone@2x.jpg 2x
+          "
+        />
+        <img src="../img/team/about-laptop.jpg" alt="team-photo" />
+      </picture>
+      <div class="container-about-inf">
+        <img class="svg-icon-about" src="../img/svg/logo-icon.svg" alt="Logo" />
+        <h1 class="about-title">About ArtistsHub</h1>
+        <p class="about-text">
+          At ArtistsHub, our mission is to connect music lovers with the artists
+          they adore. We strive to create a vibrant community where discovering
+          new music is as enjoyable as listening to it.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
+<!-- <button class="read-more-about-button">Read more about us</button>
+      <div class="modal-about">
+        ===Іконка хрестика=== 
+        <button class="close-modal-about">
+          <svg class="close-modal-about"></svg>
+        </button>
+        <h1 class="about-title">Read more</h1>
+        <p class="about-text">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Asperiores
+          necessitatibus veritatis perferendis animi quas iusto, aspernatur,
+          accusamus consectetur culpa blanditiis autem veniam temporibus
+          nesciunt iste minus ipsa ullam eveniet aperiam repellat eos excepturi
+          dolorem dolor repellendus qui? Itaque reprehenderit assumenda ut
+          ducimus incidunt, rem necessitatibus, aperiam harum modi vero ratione.
+        </p>
+      </div> -->
