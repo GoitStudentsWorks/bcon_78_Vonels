@@ -54,16 +54,11 @@ function initSwiper(totalSlides) {
 }
 
 // ************************************* ДЛЯ АЛИ (Заглушка. Якщо треба, то видалю)
-function openFeedbackModal() {
-  console.log('Модальне вікно для фідбеку має відкритися тут!');
-}
 
-function submitButtonClick() {
-  openFeedbackModal();
-}
+import { openModal } from './feedback.js';
 
 if (submitButton) {
-  submitButton.addEventListener('click', submitButtonClick);
+  submitButton.addEventListener('click', openModal);
 }
 // *************************************
 
