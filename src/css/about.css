@@ -5,7 +5,6 @@
   flex-direction: column;
   gap: 48px;
   padding: 64px 20px;
-  max-width: 320px;
 }
 .container-about-inf {
   display: flex;
@@ -37,7 +36,6 @@
 @media only screen and (min-width: 768px) {
   .about-container {
     gap: 80px;
-    max-width: 768px;
   }
   .container-about-inf {
     gap: 24px;
@@ -56,7 +54,6 @@
   .about-container {
     flex-direction: row;
     padding: 112px 64px;
-    max-width: 1440px;
   }
   .container-about-inf {
     flex-direction: column;
