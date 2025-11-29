@@ -1,306 +1,209 @@
-const refs = {
-  gallery: document.querySelector('#gallery'),
-  backgroundModal: document.querySelector('.background-modal'),
-  closeBtn: document.querySelector('.closeBtn'),
-  modal: document.querySelector('.modal'),
-  modalContent: document.querySelector('.modal-content-first-part'),
-  loader: document.querySelector('.loader'),
-};
+import axios from 'axios';
 
-// const globalVariables = {
-//   backgroundModalScrollTop: 0
-// }
+/* ------------------ HELPERS ------------------ */
 
-let contentAvailable = false;
+function formatDuration(ms) {
+  const totalSeconds = Math.floor(ms / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+}
 
-function createModalArtistInfo(data) {
-  if (data === null || data === undefined) return;
-  if (contentAvailable) {
-    return;
-  } else {
-    refs.modalContent.innerHTML = '';
-    const modalArtistInfo = createArtistCardInfo(data);
+function getYears(yearStart, yearEnd) {
+  if (yearStart === null && yearEnd === null) return 'Information missing';
+  if (yearEnd === null) return `${yearStart}-present`;
+  return `${yearStart} - ${yearEnd}`;
+}
 
-    // 1
-    refs.modalContent.insertAdjacentHTML('beforeend', modalArtistInfo);
-    data.strBiographyEN = data.strBiographyEN || 'information missing';
-    setupShowMore(data.strBiographyEN, 300);
+function showLoader() {
+  const loader = document.querySelector('.loader');
+  loader.style.display = 'block';
+}
 
-    const tagContainer = document.querySelector('#modal-tags-list');
-    const dynamicTags = createTagItems(data);
+function hideLoader() {
+  const loader = document.querySelector('.loader');
+  loader.style.display = 'none';
+}
 
-    const albumList = addGallery(data.albumsList);
+/* ---------- CREATE BIOGRAPHY HTML WITH TOGGLE ---------- */
+function createBiographyHTML(actorBiography, limit = 250) {
+  if (!actorBiography) actorBiography = 'Information missing';
 
-    // 2
-    tagContainer.insertAdjacentHTML('beforeend', dynamicTags);
-    // 3
-    refs.modalContent.insertAdjacentHTML('beforeend', albumList);
+  const isLong = actorBiography.length > limit;
+  const shortText = actorBiography.slice(0, limit);
 
-    contentAvailable = true;
+  return `
+    <span id="bio-text">${isLong ? shortText : actorBiography}</span>
+    ${
+      isLong
+        ? `<button id="bio-toggle" class="bio-toggle-btn">
+            <svg class="modal-icon" width="20" height="20">
+              <use href="../img/sprite.svg#icon-dots-horizontal"></use>
+            </svg>
+          </button>`
+        : ''
+    }
+  `;
+}
+
+function setupBioToggle(actorBiography) {
+  const bioToggleBtn = document.querySelector('#bio-toggle');
+  const bioText = document.querySelector('#bio-text');
+
+  if (!bioToggleBtn) return;
+
+  let expanded = false;
+  bioToggleBtn.addEventListener('click', () => {
+    expanded = !expanded;
+    if (expanded) {
+      bioText.textContent = actorBiography;
+      bioToggleBtn.innerHTML = `
+        <svg class="modal-icon" width="20" height="20">
+          <use href="../img/sprite.svg#icon-modal-up"></use>
+        </svg>
+      `;
+    } else {
+      bioText.textContent = actorBiography.slice(0, 250);
+      bioToggleBtn.innerHTML = `
+        <svg class="modal-icon" width="20" height="20">
+          <use href="../img/sprite.svg#icon-dots-horizontal"></use>
+        </svg>
+      `;
+    }
+  });
+}
+
+/* ------------------ API CONNECTION ------------------ */
+
+const api = axios.create({
+  baseURL: 'https://sound-wave.b.goit.study/api',
+});
+
+/* ------------------ MAIN RENDER FUNCTION ------------------ */
+
+async function init(id) {
+  try {
+    showLoader();
+    const { data } = await api.get(`/artists/${id}/albums`);
+    createAlbumList(data);
+  } catch (error) {
+    console.error('Error:', error);
+  } finally {
+    hideLoader();
   }
 }
 
-function disableModal() {
-  refs.backgroundModal.classList.remove('is-active');
-  refs.gallery.classList.remove('previous-content');
-  contentAvailable = false;
-}
+function createAlbumList(actorInfo) {
+  const {
+    strArtistThumb: actorImg,
+    strArtist: actorName,
+    intFormedYear,
+    intDiedYear,
+    genres,
+    strGender: actorGender,
+    intMembers: members,
+    strCountry: actorCountry,
+    strBiographyEN: actorBiography,
+    albumsList,
+  } = actorInfo;
 
-// !MARKUP HTML
-function createArtistCardInfo(artistInfo) {
-  let yearStart = artistInfo.intFormedYear;
-  let yearEnd = artistInfo.intDiedYear;
+  const container = document.querySelector('.modal');
+  container.innerHTML = '';
 
-  let yearsText = `${yearStart}-${yearEnd}`;
-  if (yearStart === null && yearEnd === null) {
-    yearsText = 'information missing';
-  } else if (yearEnd === null) {
-    yearsText = `${yearStart}-present`;
-  }
+  const genresHTML = genres?.map(g => `<span>${g}</span>`).join(' ') || '';
 
-  return `<h3 class="modal-artist-name">${artistInfo.strArtist}</h3>
-  <div class="modal-artist-wrapper">
-    <img class="modal-artist-info-img" width="272" height="167" src="${
-      artistInfo.strArtistThumb
-    }" alt="${artistInfo.strArtist}"/>
-    <div class="modal-artist-full-info">
-      <ul class="modal-info-list">
-        <li class="modal-info-item">
-          <h4 class="modal-info-title">Years active</h4>
-          <p class ="modal-info-text">${yearsText}</p>
-        </li>
-        <li class="modal-info-item">
-          <h4 class="modal-info-title">Sex</h4>
-          <p class ="modal-info-text">${
-            artistInfo.strGender || 'information missing'
-          }</p>
-        </li>
-        <li class="modal-info-item">
-          <h4 class="modal-info-title">Members</h4>
-          <p class ="modal-info-text">${
-            artistInfo.intMembers || 'information missing'
-          }</p>
-        </li>
-        <li class="modal-info-item">
-          <h4 class="modal-info-title">Country</h4>
-          <p class ="modal-info-text">${
-            artistInfo.strCountry || 'information missing'
-          }</p>
-        </li>
-      </ul>
-      <div class="modal-biography">
-        <h4 class="modal-info-title">Biography</h4>
-        <div class="modal-biography-container">
-          <p id="modal-biography-content" class="modal-info-text"></p>
-          <button id="modal-biography-button"></button>
-        </div>
-      </div>
-      <ul id="modal-tags-list" class="modal-tags-list">
-      </ul>
-    </div>
-  </div>`;
-}
-
-// !MARKUP FOR TAGS
-function createTagItems(artistInfo) {
-  if (!artistInfo.genres) return '';
-
-  return artistInfo.genres
-    .map(genre => `<li class="modal-tag-item">${genre}</li>`.repeat(1))
-    .join('');
-}
-
-// !MARKUP HTML 2 PART
-function addGallery(artistInfo) {
-  const albumsHTML = artistInfo
+  /* ---------- ALBUMS + TRACKS ---------- */
+  const albumsHTML = (albumsList || [])
     .slice(0, 8)
     .map(({ strAlbum, tracks }) => {
       const tracksHTML = (tracks || [])
         .map(
           ({ strTrack, intDuration, movie }) => `
-        <li class="track">
-          <span class="title">${strTrack}</span>
-          <span class="time">${formatDuration(intDuration)}</span>
-          ${movie ? `<a href="${movie}" class="yt-btn">▶</a>` : ''}
-        </li>
-      `
+          <li class="track">
+            <span class="title">${strTrack}</span>
+            <span class="time">${formatDuration(intDuration)}</span>
+            ${
+              movie
+                ? `<a href="${movie}" class="yt-btn">
+                    <svg class="modal-icon-more-text" width="20" height="20">
+                      <use href="../img/sprite.svg#icon-YouTube"></use>
+                    </svg>
+                  </a>`
+                : ''
+            }
+          </li>`
         )
         .join('');
 
       return `
-      <div class="album-card">
-        <h3>${strAlbum}</h3>
-        <div class="table-header">
-          <span>Track</span>
-          <span>Time</span>
-          <span>Link</span>
+        <div class="album-card">
+          <h3>${strAlbum}</h3>
+          <div class="table-header">
+            <span>Track</span>
+            <span>Time</span>
+            <span>Link</span>
+          </div>
+          <ul class="track-list">
+            ${tracksHTML || '<li>No tracks found</li>'}
+          </ul>
         </div>
-        <ul class="track-list">
-          ${tracksHTML || '<li>No tracks found</li>'}
-        </ul>
-      </div>
-    `;
+      `;
     })
     .reduce((acc, curr, index, arr) => {
-      if (index % 2 === 0) {
-        acc.push(`<div class="albums-thumb">${curr}`);
-      } else {
-        acc[acc.length - 1] += curr + `</div>`;
-      }
-      if (index === arr.length - 1 && index % 2 === 0) {
+      if (index % 2 === 0) acc.push(`<div class="albums-thumb">${curr}`);
+      else acc[acc.length - 1] += curr + `</div>`;
+      if (index === arr.length - 1 && index % 2 === 0)
         acc[acc.length - 1] += `</div>`;
-      }
-
       return acc;
     }, [])
     .join('');
 
-  return `  <div class="albums">
+  /* ---------- MAIN MODAL MARKUP ---------- */
+  const markup = `
+    <h1 class="actor-name">${actorName}</h1>
+    <div class="actor">
+      <img class="actor-img" src="${actorImg}" alt="${actorName}"/>
+      <ul class="actor-info">
+        <div class="actor-info-container">
+          <li><h2>Years active</h2><p>${getYears(
+            intFormedYear,
+            intDiedYear
+          )}</p></li>
+          <li><h2>Sex</h2><p>${actorGender || 'Information missing'}</p></li>
+        </div>
+        <div class="actor-info-container">
+          <li><h2>Members</h2><p>${members || 'Information missing'}</p></li>
+          <li><h2>Country</h2><p>${
+            actorCountry || 'Information missing'
+          }</p></li>
+        </div>
+        <li><h2>Biography</h2>${createBiographyHTML(actorBiography)}</li>
+        <li class="actor-cards">${genresHTML}</li>
+      </ul>
+    </div>
+
+    <div class="albums">
       <h2>Albums</h2>
-			<div class="albums-cards">
-      ${albumsHTML}
-			</div>
+      <div class="albums-cards">
+        ${albumsHTML}
+      </div>
     </div>
   `;
+
+  container.innerHTML = markup;
+
+  /* ---------- SETUP BIO TOGGLE ---------- */
+  setupBioToggle(actorBiography);
 }
-// !END MARKUP
 
-export let artistId = '';
+/* ------------------ INIT CALL ------------------ */
+document.addEventListener('click', event => {
+  const btn = event.target.closest('.learn-more-btn');
+  const container = document.querySelector('.modal-overlay');
+  container.classList.add('is-open');
+  if (!btn) return;
 
-// !FUCTION OPEN/CLOSE MODAL
-refs.gallery.addEventListener('click', async event => {
-  event.preventDefault();
-  event.stopImmediatePropagation();
-
-  if (event.target.nodeName !== 'BUTTON') {
-    return;
-  }
-
-  showLoader();
-  // !TAKE ID
-  artistId = event.target.dataset.artistId;
-
-  document.body.classList.add('no-scroll');
-
-  // !CALL FUNCTION CREATE INFO ABOUT ARTIST IN MODAL
-  await createModalInfo(artistId);
-
-  // !OPEN
-  refs.backgroundModal.classList.add('is-active');
-  refs.backgroundModal.scrollTo({
-    top: 0,
-    behavior: 'auto',
-  });
-
-  refs.gallery.classList.add('previous-content');
-  hideLoader();
-
-  // !CLOSE
-  window.addEventListener('keydown', event => {
-    event.preventDefault();
-    event.stopImmediatePropagation();
-    if (event.code !== 'Escape') {
-      return;
-    }
-    disableModal();
-    document.body.classList.remove('no-scroll');
-  });
-
-  refs.backgroundModal.addEventListener('click', event => {
-    event.preventDefault();
-    event.stopImmediatePropagation();
-
-    const targetEl = event.target;
-    const button = event.target.closest('.modal-close-btn');
-    if (targetEl !== event.currentTarget && !button) {
-      return;
-    }
-    disableModal();
-    document.body.classList.remove('no-scroll');
-  });
+  const artistId = btn.dataset.artistId;
+  console.log(btn.dataset.artistId);
+  init(artistId);
 });
-
-// !FUNCTION TAKE INFO
-async function getArtistInfo(artistId) {
-  try {
-    let urlArtist = `https://sound-wave.b.goit.study/api/artists/${artistId}/albums`;
-
-    const response = await axios.get(urlArtist);
-
-    return response.data;
-  } catch (err) {
-    console.log(err);
-  }
-}
-
-// !FUNCTION CREATE INFO ABOUT ARTIST IN MODAL
-async function createModalInfo(artistId) {
-  const data = await getArtistInfo(artistId);
-  createModalArtistInfo(data);
-}
-
-// !FUNCTIONS SECOND PART
-function formatDuration(ms) {
-  const totalSeconds = Math.floor(ms / 1000);
-  const minutes = Math.floor(totalSeconds / 60);
-  const seconds = totalSeconds % 60;
-
-  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-}
-
-// !LOADER
-function showLoader() {
-  refs.loader.style.display = 'block';
-}
-
-function hideLoader() {
-  refs.loader.style.display = 'none';
-}
-
-// !SMALLER TEXT
-function setupShowMore(fullText, limit) {
-  const contentElement = document.querySelector('#modal-biography-content');
-  const buttonElement = document.querySelector('#modal-biography-button');
-
-  const svgOpen = `<svg class="modal-icon-more-text" width="20" height="20">
-                      <use href="./img/sprite.svg#icon-dots-horizontal"></use>
-                  </svg>`;
-  const svgClose = `<svg class="modal-icon-less-text" width="20" height="20">
-                      <use href="./img/sprite.svg#icon-modal-up"></use>
-                  </svg>`;
-
-  if (fullText.length <= limit) {
-    contentElement.textContent = fullText;
-    buttonElement.style.display = 'none';
-    contentElement.appendChild(buttonElement);
-    return;
-  }
-
-  const collapsedText = fullText.substring(0, limit);
-  const expandedText = fullText;
-
-  let isCollapsed = true;
-  contentElement.textContent = collapsedText;
-  buttonElement.innerHTML = svgOpen;
-  contentElement.appendChild(buttonElement);
-
-  buttonElement.addEventListener('click', () => {
-    isCollapsed = !isCollapsed;
-
-    if (isCollapsed) {
-      contentElement.textContent = collapsedText;
-      buttonElement.innerHTML = svgOpen;
-      refs.backgroundModal.scrollTo({
-        // top: globalVariables.backgroundModalScrollTop,
-        top: 0,
-        behavior: 'smooth',
-      });
-      contentElement.appendChild(buttonElement);
-    } else {
-      contentElement.textContent = expandedText;
-      buttonElement.innerHTML = svgClose;
-      // globalVariables.backgroundModalScrollTop = refs.backgroundModal.scrollTop;
-      contentElement.appendChild(buttonElement);
-    }
-  });
-}
