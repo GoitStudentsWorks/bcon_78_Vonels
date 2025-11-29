@@ -31,6 +31,7 @@
 
 .header-logo-svg {
   fill: #fff;
+  display: block;
 }
 
 .header-list {
@@ -47,7 +48,8 @@
   font-size: 26px;
   line-height: 1.5;
   color: #fff;
-  display: inline-block;
+  display: block;
+  padding: 20px 0;
 }
 
 .header-button-menu {
@@ -123,6 +125,32 @@
   .header-button-menu {
     display: none;
   }
+
+  .header-container {
+    height: 72px;
+    padding: 0;
+  }
+
+  .header-page-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0px 64px;
+  }
+
+  .header-list {
+    display: flex;
+    gap: 32px;
+  }
+
+  .header-nav-link {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #fff;
+  }
 }
 
 @media only screen and (min-width: 1440px) {
@@ -130,5 +158,9 @@
     max-width: 1440px;
     padding-left: 64px;
     padding-right: 64px;
+  }
+
+  .header-page-nav {
+    padding: 0px;
   }
 }
