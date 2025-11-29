@@ -1,12 +1,15 @@
 import Swiper from 'swiper/bundle';
 
-const BASE_URL = 'https://sound-wave.b.goit.study/api';
-const FEEDBACKS_ENDPOINT = '/feedbacks';
-const API_URL = `${BASE_URL}${FEEDBACKS_ENDPOINT}`;
-
+const BASE_URL = 'https://sound-wave.b.goit.study';
+// const FEEDBACKS_ENDPOINT = '/api/feedbacks';
+const API_URL = `${BASE_URL}/api/feedbacks`;
+const STORAGE_KEY = 'project-feedbacks';
 const swiperWrapper = document.querySelector('.swiper-wrapper');
 const submitButton = document.querySelector('.feedback-submit-btn');
 
+// {
+//   FEEDBACKS_ENDPOINT;
+// }
 function createFeedbackMarkup({ name, feedback, rating }) {
   const roundedRating = Math.round(rating);
   const starsMarkup = '⭐'.repeat(roundedRating);
@@ -53,21 +56,7 @@ function initSwiper(totalSlides) {
   });
 }
 
-// ************************************* ДЛЯ АЛИ (Заглушка. Якщо треба, то видалю)
-function openFeedbackModal() {
-  console.log('Модальне вікно для фідбеку має відкритися тут!');
-}
-
-function submitButtonClick() {
-  openFeedbackModal();
-}
-
-if (submitButton) {
-  submitButton.addEventListener('click', submitButtonClick);
-}
-// *************************************
-
-async function loadFeedbacks() {
+async function updateFeedbacks() {
   if (!swiperWrapper) {
     console.error('Swiper wrapper element not found.');
     return;
@@ -78,23 +67,57 @@ async function loadFeedbacks() {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
+    let apiData = await response.json();
 
-    let data = await response.json();
+    const localData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 
-    if (!Array.isArray(data) || data.length === 0) {
+    const combinedData = [...localData, ...apiData];
+
+    if (combinedData.length === 0) {
       swiperWrapper.innerHTML = `<p class="no-feedback-message">Наразі відгуків немає.</p>`;
+
       return;
     }
 
-    const feedbacksToRender = data.slice(0, 10);
+    const feedbacksToRender = combinedData.slice(0, 10);
     const markup = feedbacksToRender.map(createFeedbackMarkup).join('');
+
     swiperWrapper.innerHTML = markup;
+
     initSwiper(feedbacksToRender.length);
   } catch (error) {
-    console.error('Помилка при отриманні відгуків:', error);
+    console.error('Помилка при оновленні відгуків:', error);
 
-    swiperWrapper.innerHTML = `<p class="error-message">Не вдалося завантажити відгуки. Спробуйте пізніше.</p>`;
+    // ПРИМУСОВЕ ЗАВАНТАЖЕННЯ Local Storage ПРИ ПОМИЛЦІ API
+    const localData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+    if (localData.length > 0) {
+      const feedbacksToRender = localData.slice(0, 10);
+      const markup = feedbacksToRender.map(createFeedbackMarkup).join('');
+
+      swiperWrapper.innerHTML = markup;
+      initSwiper(feedbacksToRender.length);
+    } else {
+      swiperWrapper.innerHTML = `<p class="error-message">Не вдалося завантажити відгуки. Спробуйте пізніше.</p>`;
+    }
   }
+
+  // catch (error) {
+  //   console.error('Помилка при оновленні відгуків:', error);
+  //   swiperWrapper.innerHTML = `<p class="error-message">Не вдалося завантажити відгуки. Спробуйте пізніше.</p>`;
+  // }
 }
 
-loadFeedbacks();
+// -----------------------------------------------------------------
+// 2. ЛОГІКА МОДАЛЬНОГО ВІКНА
+// -----------------------------------------------------------------
+
+window.updateFeedbacks = updateFeedbacks;
+
+import { openModal } from '../js/feedbackwindow';
+
+if (submitButton) {
+  submitButton.addEventListener('click', openModal);
+}
+
+updateFeedbacks();
