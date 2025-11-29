@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-/* ------------------ HELPERS ------------------ */
+/* ============================================================
+   HELPERS
+   ============================================================ */
 
 function formatDuration(ms) {
   const totalSeconds = Math.floor(ms / 1000);
@@ -10,32 +12,35 @@ function formatDuration(ms) {
 }
 
 function getYears(yearStart, yearEnd) {
-  if (yearStart === null && yearEnd === null) return 'Information missing';
-  if (yearEnd === null) return `${yearStart}-present`;
+  if (!yearStart && !yearEnd) return 'Information missing';
+  if (!yearEnd) return `${yearStart}-present`;
   return `${yearStart} - ${yearEnd}`;
 }
 
 function showLoader() {
   const loader = document.querySelector('.loader');
-  loader.style.display = 'block';
+  if (loader) loader.style.display = 'block';
 }
 
 function hideLoader() {
   const loader = document.querySelector('.loader');
-  loader.style.display = 'none';
+  if (loader) loader.style.display = 'none';
 }
 
-/* ---------- CREATE BIOGRAPHY HTML WITH TOGGLE ---------- */
-function createBiographyHTML(actorBiography, limit = 250) {
-  if (!actorBiography) actorBiography = 'Information missing';
+/* ============================================================
+   BIOGRAPHY TOGGLE
+   ============================================================ */
 
-  const isLong = actorBiography.length > limit;
-  const shortText = actorBiography.slice(0, limit);
+function createBiographyHTML(text, limit = 250) {
+  if (!text) text = 'Information missing';
+
+  const tooLong = text.length > limit;
+  const shortText = text.slice(0, limit);
 
   return `
-    <span id="bio-text">${isLong ? shortText : actorBiography}</span>
+    <span id="bio-text">${tooLong ? shortText : text}</span>
     ${
-      isLong
+      tooLong
         ? `<button id="bio-toggle" class="bio-toggle-btn">
             <svg class="modal-icon" width="20" height="20">
               <use href="../img/sprite.svg#icon-dots-horizontal"></use>
@@ -46,25 +51,26 @@ function createBiographyHTML(actorBiography, limit = 250) {
   `;
 }
 
-function setupBioToggle(actorBiography) {
-  const bioToggleBtn = document.querySelector('#bio-toggle');
-  const bioText = document.querySelector('#bio-text');
-
-  if (!bioToggleBtn) return;
+function setupBioToggle(fullText) {
+  const btn = document.querySelector('#bio-toggle');
+  const textElem = document.querySelector('#bio-text');
+  if (!btn) return;
 
   let expanded = false;
-  bioToggleBtn.addEventListener('click', () => {
+
+  btn.addEventListener('click', () => {
     expanded = !expanded;
+
     if (expanded) {
-      bioText.textContent = actorBiography;
-      bioToggleBtn.innerHTML = `
+      textElem.textContent = fullText;
+      btn.innerHTML = `
         <svg class="modal-icon" width="20" height="20">
           <use href="../img/sprite.svg#icon-modal-up"></use>
         </svg>
       `;
     } else {
-      bioText.textContent = actorBiography.slice(0, 250);
-      bioToggleBtn.innerHTML = `
+      textElem.textContent = fullText.slice(0, 250);
+      btn.innerHTML = `
         <svg class="modal-icon" width="20" height="20">
           <use href="../img/sprite.svg#icon-dots-horizontal"></use>
         </svg>
@@ -73,67 +79,107 @@ function setupBioToggle(actorBiography) {
   });
 }
 
-/* ------------------ API CONNECTION ------------------ */
+/* ============================================================
+   MODAL CONTROLS
+   ============================================================ */
+
+function attachModalListeners() {
+  const overlay = document.querySelector('.modal-overlay');
+  const modal = document.querySelector('.modal');
+  const exitBtn = document.querySelector('.btn-exit');
+
+  if (!overlay || !modal || !exitBtn) {
+    console.error('Modal elements not found in DOM');
+    return;
+  }
+
+  function closeModal() {
+    overlay.classList.remove('is-open');
+  }
+
+  exitBtn.addEventListener('click', closeModal);
+
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) closeModal();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
+}
+
+/* ============================================================
+   API
+   ============================================================ */
 
 const api = axios.create({
   baseURL: 'https://sound-wave.b.goit.study/api',
 });
 
-/* ------------------ MAIN RENDER FUNCTION ------------------ */
+/* ============================================================
+   MAIN RENDER FUNCTION
+   ============================================================ */
 
-async function init(id) {
+export async function init(id) {
   try {
     showLoader();
+    const container = document.querySelector('.modal-overlay');
+    container.classList.add('is-open');
     const { data } = await api.get(`/artists/${id}/albums`);
-    createAlbumList(data);
-  } catch (error) {
-    console.error('Error:', error);
+    createArtistModal(data);
+  } catch (err) {
+    console.error('Error loading artist:', err);
   } finally {
     hideLoader();
   }
 }
 
-function createAlbumList(actorInfo) {
+/* ============================================================
+   BUILD MODAL HTML
+   ============================================================ */
+
+function createArtistModal(artist) {
   const {
-    strArtistThumb: actorImg,
-    strArtist: actorName,
+    strArtistThumb,
+    strArtist,
     intFormedYear,
     intDiedYear,
     genres,
-    strGender: actorGender,
-    intMembers: members,
-    strCountry: actorCountry,
-    strBiographyEN: actorBiography,
+    strGender,
+    intMembers,
+    strCountry,
+    strBiographyEN,
     albumsList,
-  } = actorInfo;
+  } = artist;
 
   const container = document.querySelector('.modal');
   container.innerHTML = '';
 
   const genresHTML = genres?.map(g => `<span>${g}</span>`).join(' ') || '';
 
-  /* ---------- ALBUMS + TRACKS ---------- */
+  /* --- Albums --- */
   const albumsHTML = (albumsList || [])
     .slice(0, 8)
     .map(({ strAlbum, tracks }) => {
-      const tracksHTML = (tracks || [])
-        .map(
-          ({ strTrack, intDuration, movie }) => `
+      const tracksHTML =
+        tracks
+          ?.map(
+            ({ strTrack, intDuration, movie }) => `
           <li class="track">
             <span class="title">${strTrack}</span>
             <span class="time">${formatDuration(intDuration)}</span>
             ${
               movie
-                ? `<a href="${movie}" class="yt-btn">
-                    <svg class="modal-icon-more-text" width="20" height="20">
-                      <use href="../img/sprite.svg#icon-YouTube"></use>
+                ? `<a href="${movie}" class="yt-btn" target="_blank">
+                    <svg class="modal-icon-yt" width="20" height="20">
+                      <use href="/img/sprite.svg#icon-YouTube"></use>
                     </svg>
                   </a>`
                 : ''
             }
           </li>`
-        )
-        .join('');
+          )
+          .join('') || '<li>No tracks found</li>';
 
       return `
         <div class="album-card">
@@ -143,67 +189,56 @@ function createAlbumList(actorInfo) {
             <span>Time</span>
             <span>Link</span>
           </div>
-          <ul class="track-list">
-            ${tracksHTML || '<li>No tracks found</li>'}
-          </ul>
+          <ul class="track-list">${tracksHTML}</ul>
         </div>
       `;
     })
-    .reduce((acc, curr, index, arr) => {
-      if (index % 2 === 0) acc.push(`<div class="albums-thumb">${curr}`);
-      else acc[acc.length - 1] += curr + `</div>`;
-      if (index === arr.length - 1 && index % 2 === 0)
-        acc[acc.length - 1] += `</div>`;
+    .reduce((acc, item, i, arr) => {
+      if (i % 2 === 0) acc.push(`<div class="albums-thumb">${item}`);
+      else acc[acc.length - 1] += item + `</div>`;
+      if (i === arr.length - 1 && i % 2 === 0) acc[acc.length - 1] += `</div>`;
       return acc;
     }, [])
     .join('');
 
-  /* ---------- MAIN MODAL MARKUP ---------- */
-  const markup = `
-    <h1 class="actor-name">${actorName}</h1>
+  /* --- FINAL MARKUP --- */
+  container.innerHTML = `
+    <button class="btn-exit" type="button">
+      <svg class="modal-icon-exit" width="20" height="20">
+        <use href="/img/sprite.svg#icon-close"></use>
+      </svg>
+    </button>
+
+    <h1 class="actor-name">${strArtist}</h1>
+
     <div class="actor">
-      <img class="actor-img" src="${actorImg}" alt="${actorName}"/>
+      <img class="actor-img" src="${strArtistThumb}" alt="${strArtist}" />
+
       <ul class="actor-info">
         <div class="actor-info-container">
           <li><h2>Years active</h2><p>${getYears(
             intFormedYear,
             intDiedYear
           )}</p></li>
-          <li><h2>Sex</h2><p>${actorGender || 'Information missing'}</p></li>
+          <li><h2>Sex</h2><p>${strGender || 'Information missing'}</p></li>
         </div>
+
         <div class="actor-info-container">
-          <li><h2>Members</h2><p>${members || 'Information missing'}</p></li>
-          <li><h2>Country</h2><p>${
-            actorCountry || 'Information missing'
-          }</p></li>
+          <li><h2>Members</h2><p>${intMembers || 'Information missing'}</p></li>
+          <li><h2>Country</h2><p>${strCountry || 'Information missing'}</p></li>
         </div>
-        <li><h2>Biography</h2>${createBiographyHTML(actorBiography)}</li>
+
+        <li><h2>Biography</h2>${createBiographyHTML(strBiographyEN)}</li>
         <li class="actor-cards">${genresHTML}</li>
       </ul>
     </div>
 
     <div class="albums">
       <h2>Albums</h2>
-      <div class="albums-cards">
-        ${albumsHTML}
-      </div>
+      <div class="albums-cards">${albumsHTML}</div>
     </div>
   `;
 
-  container.innerHTML = markup;
-
-  /* ---------- SETUP BIO TOGGLE ---------- */
-  setupBioToggle(actorBiography);
+  setupBioToggle(strBiographyEN);
+  attachModalListeners();
 }
-
-/* ------------------ INIT CALL ------------------ */
-// document.addEventListener('click', event => {
-//   const btn = event.target.closest('.learn-more-btn');
-//   const container = document.querySelector('.modal-overlay');
-//   container.classList.add('is-open');
-//   if (!btn) return;
-
-//   const artistId = btn.dataset.artistId;
-//   console.log(btn.dataset.artistId);
-//   init(artistId);
-// });

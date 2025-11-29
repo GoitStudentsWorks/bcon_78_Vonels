@@ -31,6 +31,21 @@
     position: relative;
   }
 
+  .btn-exit {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    top: 16px;
+    right: 16px;
+    background-color: transparent;
+    border: none;
+  }
+
+  .modal-icon-exit {
+    width: 14px;
+    height: 14px;
+  }
+
   .actor {
     margin-bottom: 16px;
   }
@@ -138,6 +153,16 @@
     gap: 32px;
   }
 
+  .yt-btn {
+    display: flex;
+    align-items: center;
+  }
+
+  .modal-icon-yt {
+    width: 20px;
+    height: 20px;
+  }
+
   .album-card {
     border-radius: 16px;
     padding: 14px 11px;
@@ -195,6 +220,10 @@
     max-width: 720px;
   }
 
+  .btn-exit {
+    right: 47px;
+  }
+
   .actor-info {
     flex-direction: wrap;
   }
@@ -234,6 +263,10 @@
     padding: 64px;
     max-width: 1312px;
   }
+  .btn-exit {
+    right: 16px;
+  }
+
   .actor {
     display: grid;
     grid-template-columns: 1fr 1fr;
