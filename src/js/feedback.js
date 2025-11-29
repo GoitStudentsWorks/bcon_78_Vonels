@@ -10,7 +10,7 @@ const submitButton = document.querySelector('.feedback-submit-btn');
 // {
 //   FEEDBACKS_ENDPOINT;
 // }
-function createFeedbackMarkup({ name, feedback, rating }) {
+function createFeedbackMarkup({ name, message, rating }) {
   const roundedRating = Math.round(rating);
   const starsMarkup = '⭐'.repeat(roundedRating);
 
@@ -19,7 +19,7 @@ function createFeedbackMarkup({ name, feedback, rating }) {
             ${starsMarkup}
         </div>
         <p class="feedback-text">
-            "${feedback}"
+            "${message}"
         </p>
         <p class="feedback-author">
             ${name}
