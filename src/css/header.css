@@ -20,13 +20,35 @@
   background-color: #060307;
 }
 
+.link-icon {
+  fill: white;
+}
+
+.header-nav-link .link-icon {
+  display: none;
+}
+
+.header-nav-link:focus .link-text {
+  display: none;
+}
+
+.header-nav-link:focus .link-icon {
+  display: block;
+  fill: currentColor;
+}
+
 .header-container {
-  height: 64px;
+  /* height: 64px; */
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-right: 28px;
   padding-left: 26px;
+}
+
+.header-page-nav {
+  padding-top: 7px;
+  padding-bottom: 6px;
 }
 
 .header-logo-svg {
@@ -39,7 +61,7 @@
 }
 
 .header-link-logo {
-  display: inline-block;
+  display: block;
 }
 
 .header-nav-link {
@@ -49,7 +71,7 @@
   line-height: 1.5;
   color: #fff;
   display: block;
-  padding: 20px 0;
+  /* padding: 20px 0; */
 }
 
 .header-button-menu {
@@ -127,8 +149,11 @@
   }
 
   .header-container {
-    height: 72px;
-    padding: 0;
+    /* height: 72px; */
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 11px;
+    padding-bottom: 10px;
   }
 
   .header-page-nav {
@@ -161,6 +186,7 @@
   }
 
   .header-page-nav {
-    padding: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
   }
 }
