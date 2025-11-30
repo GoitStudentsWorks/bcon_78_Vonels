@@ -12,16 +12,33 @@
   margin-right: auto;
 }
 
-/* .header {
+.header {
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
   background-color: #060307;
-} */
+}
+
+.link-icon {
+  fill: white;
+}
+
+.header-nav-link .link-icon {
+  display: none;
+}
+
+.header-nav-link:focus .link-text {
+  display: none;
+}
+
+.header-nav-link:focus .link-icon {
+  display: block;
+  fill: currentColor;
+}
 
 .header-container {
-  height: 64px;
+  /* height: 64px; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,8 +46,14 @@
   padding-left: 26px;
 }
 
+.header-page-nav {
+  padding-top: 7px;
+  padding-bottom: 6px;
+}
+
 .header-logo-svg {
   fill: #fff;
+  display: block;
 }
 
 .header-list {
@@ -38,7 +61,7 @@
 }
 
 .header-link-logo {
-  display: inline-block;
+  display: block;
 }
 
 .header-nav-link {
@@ -47,7 +70,8 @@
   font-size: 26px;
   line-height: 1.5;
   color: #fff;
-  display: inline-block;
+  display: block;
+  /* padding: 20px 0; */
 }
 
 .header-button-menu {
@@ -123,6 +147,35 @@
   .header-button-menu {
     display: none;
   }
+
+  .header-container {
+    /* height: 72px; */
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 11px;
+    padding-bottom: 10px;
+  }
+
+  .header-page-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0px 64px;
+  }
+
+  .header-list {
+    display: flex;
+    gap: 32px;
+  }
+
+  .header-nav-link {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #fff;
+  }
 }
 
 @media only screen and (min-width: 1440px) {
@@ -130,5 +183,10 @@
     max-width: 1440px;
     padding-left: 64px;
     padding-right: 64px;
+  }
+
+  .header-page-nav {
+    padding-left: 0px;
+    padding-right: 0px;
   }
 }
