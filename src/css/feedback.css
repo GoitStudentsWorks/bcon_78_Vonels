@@ -17,7 +17,6 @@
   }
 
   .feedback-section {
-    
     padding: 60px 0;
   }
   .feedback-card {
@@ -27,7 +26,7 @@
     text-align: center;
     padding: 40px 20px;
     color: #fff;
- 
+
     border-radius: 8px;
   }
   .swiper-wrapper {
@@ -35,21 +34,21 @@
   }
 
   .feedback-text {
-  font-family: var(--second-family);
-font-weight: 700;
-font-size: 26px;
-line-height: 140%;
-letter-spacing: -0.01em;
-text-align: center;
-color: var(--color-scheme-1-text);
+    font-family: var(--second-family);
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 140%;
+    letter-spacing: -0.01em;
+    text-align: center;
+    color: var(--color-scheme-1-text);
   }
 
   .feedback-author {
-  font-family: var(--font-family);
-font-weight: 600;
-font-size: 18px;
-line-height: 150%;
-color: var(--color-scheme-1-text);
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 150%;
+    color: var(--color-scheme-1-text);
   }
 
   .feedback-submit-btn {
@@ -81,18 +80,17 @@ color: var(--color-scheme-1-text);
   }
   .feedback-prev-btn,
   .feedback-next-btn {
-
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: background-color 0.3s;
     border: 1px solid var(--opacity-white-50);
-border-radius: 8px;
-padding: 12px;
-width: 48px;
-height: 48px;
-background: transparent;
+    border-radius: 8px;
+    padding: 12px;
+    width: 48px;
+    height: 48px;
+    background: transparent;
   }
 
   .feedback-prev-btn:hover,
@@ -131,19 +129,20 @@ background: transparent;
     font-size: 12px;
   }
 
-.star-on-png {
-  color:  #8a2be2;
-}
+  .star-on-png {
+    color: #8a2be2;
+  }
 
-.feedback-next-btn::after, .feedback-prev-btn::after {
+  /* .feedback-next-btn::after, .feedback-prev-btn::after {
 display: none;
-}
-.feedback-next-btn {
-mask-image: url("../img/sprite.svg#Icon");
+} */
+  /* .feedback-next-btn {
+mask-image: url("/src/img/sprite.svg#icon-rigth");
+color: #fff;
 }
 
 .feedback-prev-btn {
-mask-image: url("../img/sprite.svg#Icon");
-}
-
+mask-image: url("../img/sprite.svg#icon-left");
+fill: #fff;
+} */
 }
