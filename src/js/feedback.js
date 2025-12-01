@@ -34,8 +34,7 @@ function createFeedbackMarkup(data) {
     </div>
   `
     )
-    .join("");
-
+    .join('');
 }
 
 function initSwiper(totalSlides) {

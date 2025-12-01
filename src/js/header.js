@@ -2,6 +2,7 @@ const refs = {
   headerBtnOpenMenu: document.querySelector('.header-button-menu'),
   headerBtnCloseMenu: document.querySelector('.button-close'),
   mobileMenu: document.querySelector('.menu-drive'),
+  mobileLinks: document.querySelectorAll('.header-mobile-nav-link'),
 };
 
 const toggleMenu = () => {
@@ -14,4 +15,12 @@ if (refs.headerBtnOpenMenu && refs.mobileMenu) {
 }
 if (refs.headerBtnCloseMenu && refs.mobileMenu) {
   refs.headerBtnCloseMenu.addEventListener('click', toggleMenu);
+
+  if (refs.mobileLinks.length > 0) {
+    refs.mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        toggleMenu();
+      });
+    });
+  }
 }
