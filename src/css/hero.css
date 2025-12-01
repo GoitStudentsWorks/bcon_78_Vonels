@@ -1,5 +1,6 @@
 @media only screen and (min-width: 320px) {
     .hero-section {
+        margin-top: 64px;
         position: relative;
         overflow: hidden;
         isolation: isolate;
@@ -146,6 +147,10 @@
 }
 
 @media only screen and (min-width: 768px) {
+    .hero-section {
+        margin-top: 72 px;
+    }
+
     .hero-content {
         padding-top: 32px;
     }
