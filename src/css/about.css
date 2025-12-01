@@ -13,7 +13,10 @@
   gap: 20px;
   max-width: 280px;
 }
-
+.about-picture {
+  width: 288px;
+  height: 169px;
+}
 .svg-icon-about {
   width: 64px;
   height: 64px;
@@ -95,6 +98,10 @@
   }
   .container-about-inf {
     max-width: 704px;
+  }
+  .about-picture {
+    width: 100%;
+    height: 100%;
   }
   .about-text {
     font-size: 20px;
