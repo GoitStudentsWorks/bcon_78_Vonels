@@ -195,7 +195,7 @@
 
 #user-rating-input {
   display: flex;
-  gap: 2px;
+  gap: 3px;
 }
 
 #user-rating-input img {
