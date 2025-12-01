@@ -80,5 +80,11 @@
     <symbol id="icon-modal-up" viewBox="0 0 32 32">
     <path d="M6.667 14.667h18.667v2.667h-18.667v-2.667z"></path>
     </symbol>
+    <symbol id="icon-left" viewBox="0 0 32 32">
+<path fill="#fff" style="fill: var(--color1, #fff)" d="M18.562 27.429l-9.813-9.813h21.911v-4.571h-21.911l9.813-9.813-3.232-3.232-15.33 15.33 15.33 15.33 3.232-3.232z"></path>
+</symbol>
+<symbol id="icon-rigth" viewBox="0 0 32 32">
+<path fill="#fff" style="fill: var(--color1, #fff)" d="M12.098 27.429l3.232 3.232 15.33-15.33-15.33-15.33-3.232 3.232 9.813 9.813h-21.911v4.571h21.911l-9.813 9.813z"></path>
+</symbol>
 </defs>
 </svg>
