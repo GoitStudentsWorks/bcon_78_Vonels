@@ -32,7 +32,6 @@
   }
   .swiper-wrapper {
     color: #fff;
- 
   }
   /* Стилізація ЗІРОЧОК  */
   .star-rating-container {
@@ -100,48 +99,27 @@
 
   /* --- Пагінація (3 точки) --- */
 
-
   .feedback-pagination {
-    display: flex; 
-    justify-content: center; 
-    gap: 12px;
-    padding: 10px 0; 
-}
-
-
-.swiper-pagination-bullet {
-    width: 8px; 
-    height: 8px; 
-    background: #ffffff; 
-    opacity: 0.5;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: opacity 0.3s, background-color 0.3s;
-}
-
-
-.swiper-pagination-bullet-active {
-    opacity: 1; 
-    background: #a09ca8; 
-}
-  /* .feedback-pagination.swiper-pagination-bullets {
-    position: static;
-    transform: none;
     display: flex;
-    gap: 8px;
-    width: auto;
+    justify-content: center;
+    gap: 12px;
+    padding: 10px 0;
+    position: relative;
+    z-index: 10;
   }
 
   .feedback-pagination .swiper-pagination-bullet {
     width: 8px;
     height: 8px;
-    background: #444;
+    background: #555555;
     opacity: 1;
-    transition: all 0.3s ease;
     border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
   }
 
   .feedback-pagination .swiper-pagination-bullet-active {
-    background: #fff;
-  } */
+    background: #8a2be2 !important;
+    opacity: 1 !important;
+  }
 }
