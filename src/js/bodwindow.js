@@ -2,7 +2,7 @@ import axios from 'axios';
 
 /* ============================================================
    HELPERS
-   ============================================================ */
+============================================================ */
 
 function formatDuration(ms) {
   const totalSeconds = Math.floor(ms / 1000);
@@ -29,11 +29,10 @@ function hideLoader() {
 
 /* ============================================================
    BIOGRAPHY TOGGLE
-   ============================================================ */
+============================================================ */
 
 function createBiographyHTML(text, limit = 250) {
   if (!text) text = 'Information missing';
-
   const tooLong = text.length > limit;
   const shortText = text.slice(0, limit);
 
@@ -60,7 +59,6 @@ function setupBioToggle(fullText) {
 
   btn.addEventListener('click', () => {
     expanded = !expanded;
-
     if (expanded) {
       textElem.textContent = fullText;
       btn.innerHTML = `
@@ -80,51 +78,26 @@ function setupBioToggle(fullText) {
 }
 
 /* ============================================================
-   MODAL CONTROLS
-   ============================================================ */
-
-function attachModalListeners() {
-  const overlay = document.querySelector('.modal-overlay');
-  const modal = document.querySelector('.modal');
-  const exitBtn = document.querySelector('.btn-exit');
-
-  if (!overlay || !modal || !exitBtn) {
-    console.error('Modal elements not found in DOM');
-    return;
-  }
-
-  function closeModal() {
-    overlay.classList.remove('is-open');
-  }
-
-  exitBtn.addEventListener('click', closeModal);
-
-  overlay.addEventListener('click', e => {
-    if (e.target === overlay) closeModal();
-  });
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeModal();
-  });
-}
-
-/* ============================================================
    API
-   ============================================================ */
+============================================================ */
 
 const api = axios.create({
   baseURL: 'https://sound-wave.b.goit.study/api',
 });
 
 /* ============================================================
-   MAIN RENDER FUNCTION
-   ============================================================ */
+   INIT
+============================================================ */
 
 export async function init(id) {
   try {
     showLoader();
-    const container = document.querySelector('.modal-overlay');
-    container.classList.add('is-open');
+    const overlay = document.querySelector('.modal-overlay');
+    const container = document.querySelector('.modal');
+    container.innerHTML = '';
+    overlay.classList.add('is-open');
+    document.body.classList.add('modal-open'); // блокуємо body скрол
+
     const { data } = await api.get(`/artists/${id}/albums`);
     createArtistModal(data);
   } catch (err) {
@@ -135,8 +108,8 @@ export async function init(id) {
 }
 
 /* ============================================================
-   BUILD MODAL HTML
-   ============================================================ */
+   MODAL HTML
+============================================================ */
 
 function createArtistModal(artist) {
   const {
@@ -157,7 +130,6 @@ function createArtistModal(artist) {
 
   const genresHTML = genres?.map(g => `<span>${g}</span>`).join(' ') || '';
 
-  /* --- Albums --- */
   const albumsHTML = (albumsList || [])
     .slice(0, 8)
     .map(({ strAlbum, tracks }) => {
@@ -165,19 +137,19 @@ function createArtistModal(artist) {
         tracks
           ?.map(
             ({ strTrack, intDuration, movie }) => `
-          <li class="track">
-            <span class="title">${strTrack}</span>
-            <span class="time">${formatDuration(intDuration)}</span>
-            ${
-              movie
-                ? `<a href="${movie}" class="yt-btn" target="_blank">
-                    <svg class="modal-icon-yt" width="20" height="20">
-                      <use href="/img/sprite.svg#icon-YouTube"></use>
-                    </svg>
-                  </a>`
-                : ''
-            }
-          </li>`
+            <li class="track">
+              <span class="title">${strTrack}</span>
+              <span class="time">${formatDuration(intDuration)}</span>
+              ${
+                movie
+                  ? `<a href="${movie}" class="yt-btn" target="_blank">
+                      <svg class="modal-icon-yt" width="20" height="20">
+                        <use href="/img/sprite.svg#icon-YouTube"></use>
+                      </svg>
+                    </a>`
+                  : ''
+              }
+            </li>`
           )
           .join('') || '<li>No tracks found</li>';
 
@@ -193,15 +165,15 @@ function createArtistModal(artist) {
         </div>
       `;
     })
-    .reduce((acc, item, i, arr) => {
+    .reduce((acc, item, i) => {
       if (i % 2 === 0) acc.push(`<div class="albums-thumb">${item}`);
       else acc[acc.length - 1] += item + `</div>`;
-      if (i === arr.length - 1 && i % 2 === 0) acc[acc.length - 1] += `</div>`;
+      if (i === albumsList.length - 1 && i % 2 === 0)
+        acc[acc.length - 1] += `</div>`;
       return acc;
     }, [])
     .join('');
 
-  /* --- FINAL MARKUP --- */
   container.innerHTML = `
     <button class="btn-exit" type="button">
       <svg class="modal-icon-exit" width="20" height="20">
@@ -212,7 +184,9 @@ function createArtistModal(artist) {
     <h1 class="actor-name">${strArtist}</h1>
 
     <div class="actor">
-      <img class="actor-img" src="${strArtistThumb}" alt="${strArtist}" />
+      <div class="actor-img-wrapper" style="position:relative;">
+        <img class="actor-img" src="${strArtistThumb}" alt="${strArtist}" />
+      </div>
 
       <ul class="actor-info">
         <div class="actor-info-container">
@@ -241,4 +215,78 @@ function createArtistModal(artist) {
 
   setupBioToggle(strBiographyEN);
   attachModalListeners();
+
+  const imgWrapper = container.querySelector('.actor-img-wrapper');
+  setupHoverVideo(imgWrapper, albumsList);
+}
+
+/* ============================================================
+   HOVER VIDEO
+============================================================ */
+
+function setupHoverVideo(imgWrapper, albumsList) {
+  if (!imgWrapper) return;
+
+  const firstVideo = albumsList?.[0]?.tracks?.find(t => t.movie)?.movie;
+  if (!firstVideo) return; // якщо немає посилання – нічого не робимо
+
+  const embedUrl = getYoutubeEmbedUrl(firstVideo);
+  if (!embedUrl) return; // якщо URL некоректний – нічого не робимо
+
+  const img = imgWrapper.querySelector('.actor-img');
+  if (!img) return;
+
+  const iframe = document.createElement('iframe');
+  iframe.style.position = 'absolute';
+  iframe.style.top = 0;
+  iframe.style.left = 0;
+  iframe.style.width = '100%';
+  iframe.style.height = '100%';
+  iframe.style.border = 'none';
+  iframe.style.borderRadius = '10px';
+  iframe.style.display = 'none';
+  iframe.allow = 'autoplay; fullscreen';
+  imgWrapper.appendChild(iframe);
+
+  // Запускаємо відео через 5 секунд
+  setTimeout(() => {
+    iframe.src = embedUrl;
+    iframe.style.display = 'block';
+  }, 5000);
+
+  // Зупинка відео при mouseleave
+  imgWrapper.addEventListener('mouseleave', () => {
+    iframe.src = '';
+    iframe.style.display = 'none';
+  });
+
+  function getYoutubeEmbedUrl(url) {
+    const match = url.match(/v=([^&]+)/) || url.match(/youtu\.be\/([^?]+)/);
+    const videoId = match ? match[1] : null;
+    if (!videoId) return null;
+    return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=1`;
+  }
+}
+
+/* ============================================================
+   MODAL LISTENERS
+============================================================ */
+
+function attachModalListeners() {
+  const overlay = document.querySelector('.modal-overlay');
+  const exitBtn = document.querySelector('.btn-exit');
+  if (!overlay || !exitBtn) return;
+
+  function closeModal() {
+    overlay.classList.remove('is-open');
+    document.body.classList.remove('modal-open');
+  }
+
+  exitBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) closeModal();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
 }
