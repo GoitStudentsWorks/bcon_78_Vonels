@@ -21,7 +21,7 @@
 }
 
 .link-icon {
-  fill: white;
+  fill: none;
 }
 
 .header-nav-link .link-icon {
@@ -34,7 +34,9 @@
 
 .header-nav-link:focus .link-icon {
   display: block;
-  fill: currentColor;
+  fill: #764191;
+  transition: opacity 250ms ease-in-out,
+    visibility cubic-bezier(0.55, 0.055, 0.675, 0.19) ease-in-out;
 }
 
 .header-container {
