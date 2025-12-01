@@ -23,11 +23,13 @@ function createFeedbackMarkup({ name, message, rating }) {
         </p>
         <p class="feedback-author">
             ${name}
-        </p>
-        <button type="button" class="feedback-submit-btn">Leave feedback</button>
+      
     </div>
     `;
 }
+
+
+
 
 function initSwiper(totalSlides) {
   const swiper = new Swiper('.feedback-slider', {
@@ -42,15 +44,25 @@ function initSwiper(totalSlides) {
     pagination: {
       el: '.feedback-pagination',
       clickable: true,
-      renderBullet: function (index, className) {
-        if (index === 0) {
-          return `<span class="${className} pagination-start" aria-label="Go to first slide"></span>`;
-        } else if (index === totalSlides - 1) {
-          return `<span class="${className} pagination-end" aria-label="Go to last slide"></span>`;
+
+      type: 'custom',
+      renderCustom: function (swiper, current, total) {
+        const MAX_VISIBLE_BULLETS = 3;
+
+        let html = '';
+
+        const displayCount = Math.min(total, MAX_VISIBLE_BULLETS);
+
+        for (let i = 1; i <= displayCount; i++) {
+          let className = 'swiper-pagination-bullet';
+
+          if (i === (current % displayCount || displayCount)) {
+            className += ' swiper-pagination-bullet-active';
+          }
+          html += `<span class="${className}" aria-label="Go to slide ${i}"></span>`;
         }
-        return `<span class="${className} pagination-middle" aria-label="Go to slide ${
-          index + 1
-        }"></span>`;
+
+        return html;
       },
     },
   });
