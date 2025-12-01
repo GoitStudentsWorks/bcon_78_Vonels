@@ -2,40 +2,11 @@ import Swiper from 'swiper/bundle';
 import axios from 'axios';
 
 const BASE_URL = 'https://sound-wave.b.goit.study';
-// const FEEDBACKS_ENDPOINT = '/api/feedbacks';
+
 const API_URL = `${BASE_URL}/api/feedbacks`;
 const STORAGE_KEY = 'project-feedbacks';
 const swiperWrapper = document.querySelector('.swiper-wrapper');
 const submitButton = document.querySelector('.feedback-submit-btn');
-// {
-//   FEEDBACKS_ENDPOINT;
-// }
-
-// function createRatingStars(rating) {
-//     const roundedRating = Math.round(data.rating);
-//   const starsMarkup = '⭐'.repeat(roundedRating);
-//   return starsMarkup;
-// }
-
-function createFeedbackMarkup(data) {
-  return data
-    .map(
-      ({ name, rating, descr }) => `
-    <div class="swiper-slide feedback-card">
-        <div class="star-rating-container">
-            ${rating}
-        </div>
-        <p class="feedback-text">
-            "${descr}"
-        </p>
-        <p class="feedback-author">
-            ${name}
-        </p>
-    </div>
-  `
-    )
-    .join('');
-}
 
 function initSwiper(totalSlides) {
   const swiper = new Swiper('.feedback-slider', {
@@ -81,29 +52,35 @@ async function updateFeedbacks() {
   }
 
   try {
-    const { data } = await axios.get(API_URL);
-    console.log(data);
-    const markup = createFeedbackMarkup(data.data);
+    const response = await axios.get(API_URL);
+    const feedbacks = response.data?.data || [];
 
-    swiperWrapper.innerHTML = markup;
+    swiperWrapper.innerHTML = feedbacks
+      .slice(0, 10)
+      .map(
+        (f, index) => `
+        <div class="swiper-slide feedback-card">
+          <div id="star-${index}" class="star-rating-container"></div>
+          <p class="feedback-text">"${f.descr}"</p>
+          <p class="feedback-author">${f.name}</p>
+        </div>
+      `
+      )
+      .join('');
 
-    initSwiper(markup.length);
-    // } catch (error) {
-    //   console.error('Помилка при оновленні відгуків:', error);
+   feedbacks.forEach((f, index) => {
+      const roundedScore = Math.round(
+        typeof f.rating === "number" ? f.rating : 0
+      );
 
-    //   // ПРИМУСОВЕ ЗАВАНТАЖЕННЯ Local Storage ПРИ ПОМИЛЦІ API
-    //   const localData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      $(`#star-${index}`).raty({
+        score: roundedScore,
+        readOnly: true,
+        starType: "i",
+      });
+    });
 
-    //   if (localData.length > 0) {
-    //     const feedbacksToRender = localData.slice(0, 10);
-    //     const markup = feedbacksToRender.map(createFeedbackMarkup).join('');
-
-    //     swiperWrapper.innerHTML = markup;
-    //     initSwiper(feedbacksToRender.length);
-    //   } else {
-    //     swiperWrapper.innerHTML = `<p class="error-message">Не вдалося завантажити відгуки. Спробуйте пізніше.</p>`;
-    //   }
-    // }
+    initSwiper(feedbacks.length);
   } catch (error) {
     console.error('Помилка при оновленні відгуків:', error);
     swiperWrapper.innerHTML = `<p class="error-message">Не вдалося завантажити відгуки. Спробуйте пізніше.</p>`;
