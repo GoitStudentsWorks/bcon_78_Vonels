@@ -28,10 +28,10 @@ function hideLoader() {
 }
 
 /* ============================================================
-   BIOGRAPHY TOGGLE
+   BIO Toggle
 ============================================================ */
 
-function createBiographyHTML(text, limit = 250) {
+function createBiographyHTML(text, limit = 500) {
   if (!text) text = 'Information missing';
   const tooLong = text.length > limit;
   const shortText = text.slice(0, limit);
@@ -41,10 +41,10 @@ function createBiographyHTML(text, limit = 250) {
     ${
       tooLong
         ? `<button id="bio-toggle" class="bio-toggle-btn">
-            <svg class="modal-icon" width="20" height="20">
-              <use href="/img/sprite.svg#icon-dots-horizontal"></use>
-            </svg>
-          </button>`
+              <svg class="modal-icon" width="20" height="20">
+                <use href="/img/sprite.svg#icon-dots-horizontal"></use>
+              </svg>
+           </button>`
         : ''
     }
   `;
@@ -59,20 +59,19 @@ function setupBioToggle(fullText) {
 
   btn.addEventListener('click', () => {
     expanded = !expanded;
+
     if (expanded) {
       textElem.textContent = fullText;
       btn.innerHTML = `
         <svg class="modal-icon" width="20" height="20">
           <use href="../img/sprite.svg#icon-modal-up"></use>
-        </svg>
-      `;
+        </svg>`;
     } else {
       textElem.textContent = fullText.slice(0, 250);
       btn.innerHTML = `
         <svg class="modal-icon" width="20" height="20">
           <use href="../img/sprite.svg#icon-dots-horizontal"></use>
-        </svg>
-      `;
+        </svg>`;
     }
   });
 }
@@ -94,9 +93,9 @@ export async function init(id) {
     showLoader();
     const overlay = document.querySelector('.modal-overlay');
     const container = document.querySelector('.modal');
+    document.body.classList.add('modal-open');
     container.innerHTML = '';
     overlay.classList.add('is-open');
-    document.body.classList.add('modal-open');
 
     const { data } = await api.get(`/artists/${id}/albums`);
     createArtistModal(data);
@@ -108,8 +107,12 @@ export async function init(id) {
 }
 
 /* ============================================================
-   MODAL HTML
+   MAIN MODAL HTML
 ============================================================ */
+
+let CURRENT_PAGE = 1;
+const ALBUMS_PER_PAGE = 8;
+let GLOBAL_ALBUMS = [];
 
 function createArtistModal(artist) {
   const {
@@ -125,54 +128,11 @@ function createArtistModal(artist) {
     albumsList,
   } = artist;
 
+  GLOBAL_ALBUMS = albumsList || [];
+  CURRENT_PAGE = 1;
+
   const container = document.querySelector('.modal');
-  container.innerHTML = '';
-
   const genresHTML = genres?.map(g => `<span>${g}</span>`).join(' ') || '';
-
-  const albumsHTML = (albumsList || [])
-    .slice(0, 8)
-    .map(({ strAlbum, tracks }) => {
-      const tracksHTML =
-        tracks
-          ?.map(
-            ({ strTrack, intDuration, movie }) => `
-            <li class="track">
-              <span class="title">${strTrack}</span>
-              <span class="time">${formatDuration(intDuration)}</span>
-              ${
-                movie
-                  ? `<a href="${movie}" class="yt-btn" target="_blank">
-                      <svg class="modal-icon-yt" width="20" height="20">
-                        <use href="/img/sprite.svg#icon-YouTube"></use>
-                      </svg>
-                    </a>`
-                  : ''
-              }
-            </li>`
-          )
-          .join('') || '<li>No tracks found</li>';
-
-      return `
-        <div class="album-card">
-          <h3>${strAlbum}</h3>
-          <div class="table-header">
-            <span>Track</span>
-            <span>Time</span>
-            <span>Link</span>
-          </div>
-          <ul class="track-list">${tracksHTML}</ul>
-        </div>
-      `;
-    })
-    .reduce((acc, item, i) => {
-      if (i % 2 === 0) acc.push(`<div class="albums-thumb">${item}`);
-      else acc[acc.length - 1] += item + `</div>`;
-      if (i === albumsList.length - 1 && i % 2 === 0)
-        acc[acc.length - 1] += `</div>`;
-      return acc;
-    }, [])
-    .join('');
 
   container.innerHTML = `
     <button class="btn-exit" type="button">
@@ -209,19 +169,147 @@ function createArtistModal(artist) {
 
     <div class="albums">
       <h2>Albums</h2>
-      <div class="albums-cards">${albumsHTML}</div>
+      <div class="albums-cards" id="albums-container"></div>
+      <div class="pagination" id="pagination"></div>
     </div>
   `;
 
   setupBioToggle(strBiographyEN);
   attachModalListeners();
 
-  const imgWrapper = container.querySelector('.actor-img-wrapper');
-  setupHoverVideo(imgWrapper, albumsList);
+  const wrapper = container.querySelector('.actor-img-wrapper');
+  setupHoverVideo(wrapper, albumsList);
+
+  renderAlbumsPage();
 }
 
 /* ============================================================
-   HOVER VIDEO
+   RENDER PAGINATION + ALBUMS
+============================================================ */
+
+function renderAlbumsPage() {
+  const start = (CURRENT_PAGE - 1) * ALBUMS_PER_PAGE;
+  const end = start + ALBUMS_PER_PAGE;
+  const items = GLOBAL_ALBUMS.slice(start, end);
+
+  const albumsContainer = document.querySelector('#albums-container');
+  albumsContainer.style.opacity = '0';
+  setTimeout(() => {
+    albumsContainer.innerHTML = buildAlbumsHTML(items);
+    albumsContainer.style.opacity = '1';
+  }, 200);
+
+  buildPagination();
+  document.querySelector('.albums').scrollIntoView({ behavior: 'smooth' });
+}
+
+function buildAlbumsHTML(list) {
+  return list
+    .map(album => {
+      const tracksHTML =
+        album.tracks
+          ?.map(
+            t => `
+        <li class="track">
+          <span class="title">${t.strTrack}</span>
+          <span class="time">${formatDuration(t.intDuration)}</span>
+          ${
+            t.movie
+              ? `<a href="${t.movie}" class="yt-btn" target="_blank">
+                    <svg class="modal-icon-yt" width="20" height="20">
+                      <use href="/img/sprite.svg#icon-YouTube"></use>
+                    </svg>
+                </a>`
+              : ''
+          }
+        </li>`
+          )
+          .join('') || '<li>No tracks found</li>';
+
+      return `
+        <div class="album-card">
+          <h3>${album.strAlbum}</h3>
+          <div class="table-header">
+            <span>Track</span>
+            <span>Time</span>
+            <span>Link</span>
+          </div>
+          <ul class="track-list">${tracksHTML}</ul>
+        </div>
+      `;
+    })
+    .reduce((acc, item, i) => {
+      if (i % 2 === 0) acc.push(`<div class="albums-thumb">${item}`);
+      else acc[acc.length - 1] += item + `</div>`;
+      return acc;
+    }, [])
+    .join('');
+}
+
+/* ============================================================
+   PAGINATION HTML
+============================================================ */
+
+function buildPagination() {
+  const totalPages = Math.ceil(GLOBAL_ALBUMS.length / ALBUMS_PER_PAGE);
+  const pag = document.querySelector('#pagination');
+  const maxVisibleButtons = 5; // максимальна кількість кнопок між "..."
+
+  let html = '';
+
+  // Кнопка Prev
+  html += `<button class="page-btn" data-move="-1" ${
+    CURRENT_PAGE === 1 ? 'disabled' : ''
+  }>Prev</button>`;
+
+  // Визначаємо старт і кінець видимих кнопок
+  let start = Math.max(CURRENT_PAGE - 2, 1);
+  let end = Math.min(start + maxVisibleButtons - 1, totalPages);
+
+  if (end - start + 1 < maxVisibleButtons) {
+    start = Math.max(end - maxVisibleButtons + 1, 1);
+  }
+
+  // Ліва крайня кнопка і ...
+  if (start > 1) {
+    html += `<button class="page-btn" data-page="1">1</button><span style="padding:0 4px;">...</span>`;
+  }
+
+  // Основні кнопки сторінок
+  for (let i = start; i <= end; i++) {
+    html += `<button class="page-btn ${
+      i === CURRENT_PAGE ? 'active-page' : ''
+    }" data-page="${i}">${i}</button>`;
+  }
+
+  // Права крайня кнопка і ...
+  if (end < totalPages) {
+    html += `<span style="padding:0 4px;">...</span><button class="page-btn" data-page="${totalPages}">${totalPages}</button>`;
+  }
+
+  // Кнопка Next
+  html += `<button class="page-btn" data-move="1" ${
+    CURRENT_PAGE === totalPages ? 'disabled' : ''
+  }>Next</button>`;
+
+  pag.innerHTML = html;
+
+  // Прив'язка подій
+  pag.querySelectorAll('.page-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const page = btn.dataset.page;
+      const move = btn.dataset.move;
+
+      if (page) CURRENT_PAGE = Number(page);
+      if (move) CURRENT_PAGE += Number(move);
+
+      renderAlbumsPage();
+    });
+  });
+}
+
+/* ============================================================
+   VIDEO THUMB
 ============================================================ */
 
 function setupHoverVideo(imgWrapper, albumsList) {
@@ -234,8 +322,6 @@ function setupHoverVideo(imgWrapper, albumsList) {
   if (!embedUrl) return;
 
   const img = imgWrapper.querySelector('.actor-img');
-  if (!img) return;
-
   const iframe = document.createElement('iframe');
   iframe.style.position = 'absolute';
   iframe.style.top = 0;
@@ -243,9 +329,8 @@ function setupHoverVideo(imgWrapper, albumsList) {
   iframe.style.width = '100%';
   iframe.style.height = '100%';
   iframe.style.border = 'none';
-  iframe.style.borderRadius = '10px';
   iframe.style.display = 'none';
-  iframe.allow = 'autoplay; fullscreen';
+
   imgWrapper.appendChild(iframe);
 
   setTimeout(() => {
@@ -260,16 +345,19 @@ function setupHoverVideo(imgWrapper, albumsList) {
 
   function getYoutubeEmbedUrl(url) {
     const match = url.match(/v=([^&]+)/) || url.match(/youtu\.be\/([^?]+)/);
-    const videoId = match ? match[1] : null;
-    if (!videoId) return null;
-    return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=1`;
+    const id = match ? match[1] : null;
+    if (!id) return null;
+    return `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&controls=1`;
   }
 }
+
+/* ============================================================
+   MODAL LISTENERS
+============================================================ */
 
 function attachModalListeners() {
   const overlay = document.querySelector('.modal-overlay');
   const exitBtn = document.querySelector('.btn-exit');
-  if (!overlay || !exitBtn) return;
 
   function closeModal() {
     overlay.classList.remove('is-open');
@@ -280,6 +368,7 @@ function attachModalListeners() {
   overlay.addEventListener('click', e => {
     if (e.target === overlay) closeModal();
   });
+
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeModal();
   });
