@@ -1,62 +1,116 @@
 .about-container {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
   flex-direction: column;
   gap: 48px;
   padding: 64px 20px;
 }
+
 .container-about-inf {
   display: flex;
-  align-items: flex-start;
   flex-direction: column;
+  align-items: flex-start;
   gap: 20px;
   max-width: 280px;
 }
+
 .svg-icon-about {
   width: 64px;
   height: 64px;
 }
+
 .about-title {
-  font-family: var(--second-family);
   font-weight: 700;
   font-size: 44px;
   line-height: 1.2;
-  letter-spacing: -0.01em;
-  color: var(--color-scheme-1-text);
-}
-.about-text {
-  font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 1.5;
-  color: var(--color-scheme-1-text);
 }
 
-@media only screen and (min-width: 768px) {
+.about-text {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.read-more-about {
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 12px;
+  padding: 10px 24px;
+  box-shadow: 0 1px 2px 0 var(--opacity-neutral-darkest-5),
+    inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2),
+    inset 0 0 0 1px var(--opacity-neutral-darkest-15),
+    inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 32px 24px 0 var(--opacity-white-5);
+  background-color: var(--color-affair);
+  border: none;
+}
+.read-more-about:hover {
+  opacity: 0.6;
+  transition: 250ms ease-in-out;
+}
+
+.read-more-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 99999;
+}
+
+.read-more-modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background-color: black;
+  padding: 40px 20px 20px 20px;
+  border-radius: 6px;
+  max-width: 600px;
+  width: calc(100% - 40px);
+  position: relative;
+  border: 1px solid white;
+}
+
+.close-button-about {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.close-button-about svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* ===== MEDIA QUERIES ===== */
+@media (min-width: 768px) {
   .about-container {
     gap: 80px;
   }
   .container-about-inf {
-    gap: 24px;
     max-width: 704px;
+  }
+  .about-text {
+    font-size: 20px;
   }
   .svg-icon-about {
     width: 80px;
     height: 80px;
   }
-
-  .about-text {
-    font-size: 20px;
-  }
 }
-@media only screen and (min-width: 1440px) {
+
+@media (min-width: 1440px) {
   .about-container {
     flex-direction: row;
     padding: 112px 64px;
   }
   .container-about-inf {
-    flex-direction: column;
     gap: 32px;
     max-width: 1312px;
   }
