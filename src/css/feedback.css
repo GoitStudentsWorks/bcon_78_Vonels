@@ -135,22 +135,15 @@ background: transparent;
   color:  #8a2be2;
 }
 
-.swiper-navigation-icon {
-
-}
-
 .feedback-next-btn::after, .feedback-prev-btn::after {
 display: none;
 }
-.feedback-next-btn::before {
-  content: "→";
-  font-size: 24px;
-  color: #fff;
+.feedback-next-btn {
+mask-image: url("../img/sprite.svg#Icon");
 }
 
-.feedback-prev-btn::before {
-  content: "←";
-  font-size: 24px;
-  color: #fff;
+.feedback-prev-btn {
+mask-image: url("../img/sprite.svg#Icon");
 }
+
 }
