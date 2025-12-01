@@ -253,16 +253,14 @@ function buildAlbumsHTML(list) {
 function buildPagination() {
   const totalPages = Math.ceil(GLOBAL_ALBUMS.length / ALBUMS_PER_PAGE);
   const pag = document.querySelector('#pagination');
-  const maxVisibleButtons = 5; // максимальна кількість кнопок між "..."
+  const maxVisibleButtons = 5;
 
   let html = '';
 
-  // Кнопка Prev
   html += `<button class="page-btn" data-move="-1" ${
     CURRENT_PAGE === 1 ? 'disabled' : ''
   }>Prev</button>`;
 
-  // Визначаємо старт і кінець видимих кнопок
   let start = Math.max(CURRENT_PAGE - 2, 1);
   let end = Math.min(start + maxVisibleButtons - 1, totalPages);
 
@@ -270,31 +268,26 @@ function buildPagination() {
     start = Math.max(end - maxVisibleButtons + 1, 1);
   }
 
-  // Ліва крайня кнопка і ...
   if (start > 1) {
     html += `<button class="page-btn" data-page="1">1</button><span style="padding:0 4px;">...</span>`;
   }
 
-  // Основні кнопки сторінок
   for (let i = start; i <= end; i++) {
     html += `<button class="page-btn ${
       i === CURRENT_PAGE ? 'active-page' : ''
     }" data-page="${i}">${i}</button>`;
   }
 
-  // Права крайня кнопка і ...
   if (end < totalPages) {
     html += `<span style="padding:0 4px;">...</span><button class="page-btn" data-page="${totalPages}">${totalPages}</button>`;
   }
 
-  // Кнопка Next
   html += `<button class="page-btn" data-move="1" ${
     CURRENT_PAGE === totalPages ? 'disabled' : ''
   }>Next</button>`;
 
   pag.innerHTML = html;
 
-  // Прив'язка подій
   pag.querySelectorAll('.page-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const page = btn.dataset.page;
