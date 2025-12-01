@@ -12,16 +12,46 @@
   margin-right: auto;
 }
 
+<<<<<<< HEAD
 /* .header {
+=======
+.header {
+>>>>>>> main
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
   background-color: #060307;
+<<<<<<< HEAD
 } */
 
 .header-container {
   height: 64px;
+=======
+}
+
+.link-icon {
+  fill: none;
+}
+
+.header-nav-link .link-icon {
+  display: none;
+}
+
+.header-nav-link:focus .link-text {
+  display: none;
+}
+
+.header-nav-link:focus .link-icon {
+  display: block;
+  fill: #764191;
+  transition: opacity 250ms ease-in-out,
+    visibility cubic-bezier(0.55, 0.055, 0.675, 0.19) ease-in-out;
+}
+
+.header-container {
+  /* height: 64px; */
+>>>>>>> main
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,8 +59,19 @@
   padding-left: 26px;
 }
 
+<<<<<<< HEAD
 .header-logo-svg {
   fill: #fff;
+=======
+.header-page-nav {
+  padding-top: 7px;
+  padding-bottom: 6px;
+}
+
+.header-logo-svg {
+  fill: #fff;
+  display: block;
+>>>>>>> main
 }
 
 .header-list {
@@ -38,7 +79,11 @@
 }
 
 .header-link-logo {
+<<<<<<< HEAD
   display: inline-block;
+=======
+  display: block;
+>>>>>>> main
 }
 
 .header-nav-link {
@@ -47,7 +92,12 @@
   font-size: 26px;
   line-height: 1.5;
   color: #fff;
+<<<<<<< HEAD
   display: inline-block;
+=======
+  display: block;
+  /* padding: 20px 0; */
+>>>>>>> main
 }
 
 .header-button-menu {
@@ -123,6 +173,38 @@
   .header-button-menu {
     display: none;
   }
+<<<<<<< HEAD
+=======
+
+  .header-container {
+    /* height: 72px; */
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 11px;
+    padding-bottom: 10px;
+  }
+
+  .header-page-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0px 64px;
+  }
+
+  .header-list {
+    display: flex;
+    gap: 32px;
+  }
+
+  .header-nav-link {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #fff;
+  }
+>>>>>>> main
 }
 
 @media only screen and (min-width: 1440px) {
@@ -131,4 +213,12 @@
     padding-left: 64px;
     padding-right: 64px;
   }
+<<<<<<< HEAD
+=======
+
+  .header-page-nav {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+>>>>>>> main
 }

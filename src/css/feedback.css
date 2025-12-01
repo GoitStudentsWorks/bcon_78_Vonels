@@ -1,4 +1,8 @@
-@media only screen and (min-width: 375px) {
+@media only screen and (min-width: 320px) {
+  section {
+    color: #fff;
+  }
+
   .is-hidden {
     position: absolute;
     width: 1px;
@@ -13,7 +17,6 @@
   }
 
   .feedback-section {
-    background-color: #000;
     padding: 60px 0;
   }
   .feedback-card {
@@ -23,28 +26,41 @@
     text-align: center;
     padding: 40px 20px;
     color: #fff;
+<<<<<<< HEAD
     background: var(--color-scheme-1-background);
+=======
+
+>>>>>>> main
     border-radius: 8px;
   }
   .swiper-wrapper {
     color: #fff;
+<<<<<<< HEAD
   }
   /* Стилізація ЗІРОЧОК  */
   .star-rating-container {
     margin-bottom: 20px;
     font-size: 24px;
+=======
+>>>>>>> main
   }
 
   .feedback-text {
-    font-size: 18px;
-    line-height: 1.4;
-    margin-bottom: 15px;
+    font-family: var(--second-family);
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 140%;
+    letter-spacing: -0.01em;
+    text-align: center;
+    color: var(--color-scheme-1-text);
   }
 
   .feedback-author {
-    font-size: 16px;
-    color: #ccc;
-    margin-bottom: 30px;
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 150%;
+    color: var(--color-scheme-1-text);
   }
 
   .feedback-submit-btn {
@@ -76,16 +92,17 @@
   }
   .feedback-prev-btn,
   .feedback-next-btn {
-    width: 44px;
-    height: 44px;
-    background-color: #0d0d0d;
-    border: 1px solid #444;
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: background-color 0.3s;
+    border: 1px solid var(--opacity-white-50);
+    border-radius: 8px;
+    padding: 12px;
+    width: 48px;
+    height: 48px;
+    background: transparent;
   }
 
   .feedback-prev-btn:hover,
@@ -95,24 +112,49 @@
 
   /* --- Пагінація (3 точки) --- */
 
-  .feedback-pagination.swiper-pagination-bullets {
-    position: static;
-    transform: none;
+  .feedback-pagination {
     display: flex;
-    gap: 8px;
-    width: auto;
+    justify-content: center;
+    gap: 12px;
+    padding: 10px 0;
+    position: relative;
+    z-index: 10;
   }
 
   .feedback-pagination .swiper-pagination-bullet {
     width: 8px;
     height: 8px;
-    background: #444;
+    background: #555555;
     opacity: 1;
-    transition: all 0.3s ease;
     border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
   }
 
   .feedback-pagination .swiper-pagination-bullet-active {
-    background: #fff;
+    background: #8a2be2 !important;
+    opacity: 1 !important;
   }
+  /* Стилізація ЗІРОЧОК  */
+  .star-rating-container {
+    margin-bottom: 20px;
+    font-size: 12px;
+  }
+
+  .star-on-png {
+    color: #8a2be2;
+  }
+
+  /* .feedback-next-btn::after, .feedback-prev-btn::after {
+display: none;
+} */
+  /* .feedback-next-btn {
+mask-image: url("/src/img/sprite.svg#icon-rigth");
+color: #fff;
+}
+
+.feedback-prev-btn {
+mask-image: url("../img/sprite.svg#icon-left");
+fill: #fff;
+} */
 }

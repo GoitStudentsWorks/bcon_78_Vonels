@@ -1,30 +1,12 @@
 import Swiper from 'swiper/bundle';
+import axios from 'axios';
 
-const BASE_URL = 'https://sound-wave.b.goit.study/api';
-const FEEDBACKS_ENDPOINT = '/feedbacks';
-const API_URL = `${BASE_URL}${FEEDBACKS_ENDPOINT}`;
+const BASE_URL = 'https://sound-wave.b.goit.study';
 
+const API_URL = `${BASE_URL}/api/feedbacks`;
+const STORAGE_KEY = 'project-feedbacks';
 const swiperWrapper = document.querySelector('.swiper-wrapper');
 const submitButton = document.querySelector('.feedback-submit-btn');
-
-function createFeedbackMarkup({ name, feedback, rating }) {
-  const roundedRating = Math.round(rating);
-  const starsMarkup = '⭐'.repeat(roundedRating);
-
-  return `<div class="swiper-slide feedback-card">
-        <div class="star-rating-container">
-            ${starsMarkup}
-        </div>
-        <p class="feedback-text">
-            "${feedback}"
-        </p>
-        <p class="feedback-author">
-            ${name}
-        </p>
-        <button type="button" class="feedback-submit-btn">Leave feedback</button>
-    </div>
-    `;
-}
 
 function initSwiper(totalSlides) {
   const swiper = new Swiper('.feedback-slider', {
@@ -39,62 +21,82 @@ function initSwiper(totalSlides) {
     pagination: {
       el: '.feedback-pagination',
       clickable: true,
-      renderBullet: function (index, className) {
-        if (index === 0) {
-          return `<span class="${className} pagination-start" aria-label="Go to first slide"></span>`;
-        } else if (index === totalSlides - 1) {
-          return `<span class="${className} pagination-end" aria-label="Go to last slide"></span>`;
+
+      type: 'custom',
+      renderCustom: function (swiper, current, total) {
+        const MAX_VISIBLE_BULLETS = 3;
+
+        let html = '';
+
+        const displayCount = Math.min(total, MAX_VISIBLE_BULLETS);
+
+        for (let i = 1; i <= displayCount; i++) {
+          let className = 'swiper-pagination-bullet';
+
+          if (i === (current % displayCount || displayCount)) {
+            className += ' swiper-pagination-bullet-active';
+          }
+          html += `<span class="${className}" aria-label="Go to slide ${i}"></span>`;
         }
-        return `<span class="${className} pagination-middle" aria-label="Go to slide ${
-          index + 1
-        }"></span>`;
+
+        return html;
       },
     },
   });
 }
 
-// ************************************* ДЛЯ АЛИ (Заглушка. Якщо треба, то видалю)
-function openFeedbackModal() {
-  console.log('Модальне вікно для фідбеку має відкритися тут!');
-}
-
-function submitButtonClick() {
-  openFeedbackModal();
-}
-
-if (submitButton) {
-  submitButton.addEventListener('click', submitButtonClick);
-}
-// *************************************
-
-async function loadFeedbacks() {
+async function updateFeedbacks() {
   if (!swiperWrapper) {
     console.error('Swiper wrapper element not found.');
     return;
   }
 
   try {
-    const response = await fetch(API_URL);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+    const response = await axios.get(API_URL);
+    const feedbacks = response.data?.data || [];
 
-    let data = await response.json();
+    swiperWrapper.innerHTML = feedbacks
+      .slice(0, 10)
+      .map(
+        (f, index) => `
+        <div class="swiper-slide feedback-card">
+          <div id="star-${index}" class="star-rating-container"></div>
+          <p class="feedback-text">"${f.descr}"</p>
+          <p class="feedback-author">${f.name}</p>
+        </div>
+      `
+      )
+      .join('');
 
-    if (!Array.isArray(data) || data.length === 0) {
-      swiperWrapper.innerHTML = `<p class="no-feedback-message">Наразі відгуків немає.</p>`;
-      return;
-    }
+   feedbacks.forEach((f, index) => {
+      const roundedScore = Math.round(
+        typeof f.rating === "number" ? f.rating : 0
+      );
 
-    const feedbacksToRender = data.slice(0, 10);
-    const markup = feedbacksToRender.map(createFeedbackMarkup).join('');
-    swiperWrapper.innerHTML = markup;
-    initSwiper(feedbacksToRender.length);
+      $(`#star-${index}`).raty({
+        score: roundedScore,
+        readOnly: true,
+        starType: "i",
+      });
+    });
+
+    initSwiper(feedbacks.length);
   } catch (error) {
-    console.error('Помилка при отриманні відгуків:', error);
-
+    console.error('Помилка при оновленні відгуків:', error);
     swiperWrapper.innerHTML = `<p class="error-message">Не вдалося завантажити відгуки. Спробуйте пізніше.</p>`;
   }
 }
 
-loadFeedbacks();
+// -----------------------------------------------------------------
+// 2. ЛОГІКА МОДАЛЬНОГО ВІКНА
+// -----------------------------------------------------------------
+
+window.updateFeedbacks = updateFeedbacks;
+
+import { openModal } from '../js/feedbackwindow';
+
+if (submitButton) {
+  submitButton.addEventListener('click', openModal);
+}
+
+updateFeedbacks();

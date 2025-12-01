@@ -11,7 +11,7 @@ import {
   clearArtistsList,
 } from './artisterror';
 // svvvsddsv
-const BASE_URL = 'https://sound-wave.b.goit.study'; 
+const BASE_URL = 'https://sound-wave.b.goit.study';
 const PER_PAGE = 8;
 
 export async function getArtists(page = 1) {
@@ -77,5 +77,10 @@ loadMoreBtn.addEventListener('click', async () => {
   currentArtistPage += 1;
   await fetchArtists();
 });
+<<<<<<< HEAD
 // Auto-fetch disabled - filtererror.js now handles initial loading
 // fetchArtists();
+=======
+
+fetchArtists();
+>>>>>>> main

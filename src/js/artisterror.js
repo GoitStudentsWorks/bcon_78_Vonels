@@ -29,7 +29,11 @@ function createGenreElements(genres) {
     .map(genre => {
       return `<span class="genre-tag">${genre}</span>`;
     })
+<<<<<<< HEAD
     .join('');
+=======
+    .join(' ');
+>>>>>>> main
 
   return `<div class="artist-genres">${tags}</div>`;
 }
@@ -64,7 +68,13 @@ export function createArtistCards(artists) {
                         data-artist-id="${artist._id}"
                     >
                         Learn More
+<<<<<<< HEAD
                         
+=======
+                        <svg class="model-open-btm-icon" width="8" height="14">
+                            <use href="../img/sprite.svg#icon-con"></use>
+                        </svg>
+>>>>>>> main
 
                     </button>
                 </li>

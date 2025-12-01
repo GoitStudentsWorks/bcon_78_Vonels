@@ -1,7 +1,10 @@
 body {
   background-color: black;
   color: white;
+<<<<<<< HEAD
   padding: 112px 64px;
+=======
+>>>>>>> main
 }
 
 .section-title {
@@ -22,6 +25,10 @@ body {
   letter-spacing: -0.01em;
   color: var(--color-scheme-1-text);
   max-width: 500px;
+<<<<<<< HEAD
+=======
+  /* padding-bottom: 80px; */
+>>>>>>> main
 }
 
 .artists-load-more-btn {
@@ -50,9 +57,15 @@ body {
   font-size: 16px;
 }
 
+<<<<<<< HEAD
 .artists-loader.is-hidden {
   display: none;
 } 
+=======
+/* .artists-loader.is-hidden {
+  display: none;
+}  */
+>>>>>>> main
 
 .artist-short-info {
     display: -webkit-box;
@@ -69,7 +82,19 @@ body {
 
 @media only screen and (min-width: 320px) {
     .artist-section {
+<<<<<<< HEAD
         padding: 64px 16px;
+=======
+        padding: 64px 0;
+    }
+
+    .model-btm-icon {
+        margin-left: 12px;
+    }
+
+    .model-open-btm-icon {
+        margin-left: 12px;
+>>>>>>> main
     }
 
     .section-subtitle {
@@ -81,6 +106,14 @@ body {
         width: 288px;
         height: 177px;
         margin-bottom: 24px;
+<<<<<<< HEAD
+=======
+        /* border-radius: 16px;
+        margin-bottom: 24px;
+        object-fit: cover;
+        width: 100%;
+        height: 177px; */
+>>>>>>> main
     }
 
     .genre-tag {
@@ -144,11 +177,24 @@ body {
     .scroll-btm-icon {
         color: var(--color-white);
     }
+<<<<<<< HEAD
+=======
+
+    /* .artist-genres {
+        display: flex;
+        gap: 16px;
+    } */
+    
+>>>>>>> main
 }
 
 @media only screen and (min-width: 768px) {
     .artist-section {
+<<<<<<< HEAD
         padding: 64px 32px;
+=======
+        padding: 64px 0;
+>>>>>>> main
     }
 
     .section-subtitle {
@@ -184,7 +230,11 @@ body {
 
 @media only screen and (min-width: 1440px) {
     .artist-section {
+<<<<<<< HEAD
         padding: 112px 64px;
+=======
+        padding: 112px 0;
+>>>>>>> main
     }
 
     .section-subtitle {
@@ -194,6 +244,10 @@ body {
         line-height: 120%;
         letter-spacing: -0.01em;
         color: var(--color-scheme-1-text);
+<<<<<<< HEAD
+=======
+        margin-bottom: 80px;
+>>>>>>> main
     }
 
     .artists-list {
@@ -213,8 +267,13 @@ body {
 
     .img-card {
         border-radius: 16px;
+<<<<<<< HEAD
         width: 640px;
         height: 393px;
+=======
+        width: 472px;
+        height: 290px;
+>>>>>>> main
     }
 
     .artists-load-more-btn {
