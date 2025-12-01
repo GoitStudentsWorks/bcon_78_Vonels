@@ -42,7 +42,7 @@ function createBiographyHTML(text, limit = 250) {
       tooLong
         ? `<button id="bio-toggle" class="bio-toggle-btn">
             <svg class="modal-icon" width="20" height="20">
-              <use href="../img/sprite.svg#icon-dots-horizontal"></use>
+              <use href="/img/sprite.svg#icon-dots-horizontal"></use>
             </svg>
           </button>`
         : ''
@@ -96,7 +96,7 @@ export async function init(id) {
     const container = document.querySelector('.modal');
     container.innerHTML = '';
     overlay.classList.add('is-open');
-    document.body.classList.add('modal-open'); // блокуємо body скрол
+    document.body.classList.add('modal-open');
 
     const { data } = await api.get(`/artists/${id}/albums`);
     createArtistModal(data);
@@ -228,10 +228,10 @@ function setupHoverVideo(imgWrapper, albumsList) {
   if (!imgWrapper) return;
 
   const firstVideo = albumsList?.[0]?.tracks?.find(t => t.movie)?.movie;
-  if (!firstVideo) return; // якщо немає посилання – нічого не робимо
+  if (!firstVideo) return;
 
   const embedUrl = getYoutubeEmbedUrl(firstVideo);
-  if (!embedUrl) return; // якщо URL некоректний – нічого не робимо
+  if (!embedUrl) return;
 
   const img = imgWrapper.querySelector('.actor-img');
   if (!img) return;
@@ -248,13 +248,11 @@ function setupHoverVideo(imgWrapper, albumsList) {
   iframe.allow = 'autoplay; fullscreen';
   imgWrapper.appendChild(iframe);
 
-  // Запускаємо відео через 5 секунд
   setTimeout(() => {
     iframe.src = embedUrl;
     iframe.style.display = 'block';
   }, 5000);
 
-  // Зупинка відео при mouseleave
   imgWrapper.addEventListener('mouseleave', () => {
     iframe.src = '';
     iframe.style.display = 'none';
@@ -267,10 +265,6 @@ function setupHoverVideo(imgWrapper, albumsList) {
     return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=1`;
   }
 }
-
-/* ============================================================
-   MODAL LISTENERS
-============================================================ */
 
 function attachModalListeners() {
   const overlay = document.querySelector('.modal-overlay');
