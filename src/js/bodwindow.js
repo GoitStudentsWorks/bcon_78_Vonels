@@ -180,27 +180,26 @@ function createArtistModal(artist) {
   const wrapper = container.querySelector('.actor-img-wrapper');
   setupHoverVideo(wrapper, albumsList);
 
-  renderAlbumsPage();
+  renderAlbumsPage(true);
 }
 
 /* ============================================================
    RENDER PAGINATION + ALBUMS
 ============================================================ */
 
-function renderAlbumsPage() {
+function renderAlbumsPage(bool) {
   const start = (CURRENT_PAGE - 1) * ALBUMS_PER_PAGE;
   const end = start + ALBUMS_PER_PAGE;
   const items = GLOBAL_ALBUMS.slice(start, end);
-
   const albumsContainer = document.querySelector('#albums-container');
-  albumsContainer.style.opacity = '0';
-  setTimeout(() => {
-    albumsContainer.innerHTML = buildAlbumsHTML(items);
-    albumsContainer.style.opacity = '1';
-  }, 200);
+
+  albumsContainer.innerHTML = buildAlbumsHTML(items);
 
   buildPagination();
-  document.querySelector('.albums').scrollIntoView({ behavior: 'smooth' });
+
+  if (!bool) {
+    document.querySelector('.albums').scrollIntoView({ behavior: 'smooth' });
+  }
 }
 
 function buildAlbumsHTML(list) {
@@ -255,15 +254,12 @@ function buildPagination() {
   const pag = document.querySelector('#pagination');
   const maxVisibleButtons = 5;
 
-  let html = '';
-
-  html += `<button class="page-btn" data-move="-1" ${
+  let html = `<button class="page-btn" data-move="-1" ${
     CURRENT_PAGE === 1 ? 'disabled' : ''
   }>Prev</button>`;
 
   let start = Math.max(CURRENT_PAGE - 2, 1);
   let end = Math.min(start + maxVisibleButtons - 1, totalPages);
-
   if (end - start + 1 < maxVisibleButtons) {
     start = Math.max(end - maxVisibleButtons + 1, 1);
   }
@@ -288,17 +284,18 @@ function buildPagination() {
 
   pag.innerHTML = html;
 
-  pag.querySelectorAll('.page-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const page = btn.dataset.page;
-      const move = btn.dataset.move;
+  pag.onclick = e => {
+    const btn = e.target.closest('.page-btn');
+    if (!btn || btn.disabled) return;
 
-      if (page) CURRENT_PAGE = Number(page);
-      if (move) CURRENT_PAGE += Number(move);
+    const page = btn.dataset.page;
+    const move = btn.dataset.move;
 
-      renderAlbumsPage();
-    });
-  });
+    if (page) CURRENT_PAGE = Number(page);
+    if (move) CURRENT_PAGE += Number(move);
+
+    renderAlbumsPage(false);
+  };
 }
 
 /* ============================================================
