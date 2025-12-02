@@ -1,7 +1,6 @@
 import axios from 'axios';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
-
 import {
   createArtistCards,
   showArtistsLoader,
@@ -10,8 +9,7 @@ import {
   hideArtistsLoadMoreButton,
   clearArtistsList,
 } from './artisterror';
-// import { data } from 'jquery';
-// svvvsddsv
+
 const BASE_URL = 'https://sound-wave.b.goit.study';
 const PER_PAGE = 8;
 
@@ -23,7 +21,6 @@ export async function getArtists(page = 1) {
 
   try {
     const response = await axios.get(`${BASE_URL}/api/artists`, { params });
-    // console.log(response.data);
     return response.data;
   } catch (error) {
     throw error;
@@ -37,7 +34,6 @@ let totalArtistPages = 0;
 
 async function fetchArtists(page = 1, bool = false) {
   showArtistsLoader();
-//   hideArtistsLoadMoreButton();
 
   try {
     const data = await getArtists(page);
@@ -52,7 +48,6 @@ async function fetchArtists(page = 1, bool = false) {
       if (bool) {
           document.querySelector('.section-subtitle').scrollIntoView({ behavior: 'smooth' });
       }
-
     if (artists.length === 0) {
       iziToast.error({
         title: 'Поиск не дал результатов',
@@ -61,56 +56,20 @@ async function fetchArtists(page = 1, bool = false) {
       });
       return;
     }
-
-    // if (currentArtistPage < totalArtistPages) {
-    //   showArtistsLoadMoreButton();
-    // } else {
-    //   hideArtistsLoadMoreButton();
-    // }
   } catch (error) {
     iziToast.error({
       title: 'Ошибка',
       message: `Ошибка запроса: ${error.message}`,
       position: 'topRight',
     });
-    // hideArtistsLoadMoreButton();
   } finally {
     hideArtistsLoader();
   }
 }
 
-// loadMoreBtn.addEventListener('click', async () => {
-//   currentArtistPage += 1;
-//   await fetchArtists();
-// });
-
 fetchArtists();
 
 const paginationEl = document.querySelector('.pagination');
-// function renderPagination(currentPage, totalPages) {
-//     paginationEl.innerHTML = '';
-//     let markup = '';
-//     if (totalPages <= 4) {
-//         for (let i = 1; i <= totalPages; i++) {
-//         markup += `<button class="paginationBtn ${i === currentPage?'active':''}" data-page="${i}">${i}</button>`;
-//     }
-//         paginationEl.innerHTML = markup;
-//         return;
-//     }
-//     for (let i = 1; i <= 3; i++) {
-//         markup += `<button class="paginationBtn" data-page="${i}">${i}</button>`;
-//     }
-//     markup += `<span class="pagination-dots">...</span>`;
-//     markup += `<button class="paginationBtn ${totalPages === currentPage?'active':''}" data-page="${totalPages}">${totalPages}</button>`;
-//     paginationEl.innerHTML = markup;    
-// }
-
-// paginationEl.addEventListener('click', (e) => {
-//     if (!e.target.classList.contains('paginationBtn')) return;
-//     const page = Number(e.target.dataset.page);
-//     fetchArtists(page);
-// })
-// const paginationEl = document.querySelector('.pagination-list');
 
 function createButton(page, text, currentPage, totalPages) {
     const isActive = page === currentPage ? ' active' : '';
