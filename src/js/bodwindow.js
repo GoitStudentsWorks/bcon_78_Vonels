@@ -256,7 +256,7 @@ function buildPagination() {
 
   let html = `<button class="page-btn" data-move="-1" ${
     CURRENT_PAGE === 1 ? 'disabled' : ''
-  }>Prev</button>`;
+  }>←</button>`;
 
   let start = Math.max(CURRENT_PAGE - 2, 1);
   let end = Math.min(start + maxVisibleButtons - 1, totalPages);
@@ -280,7 +280,7 @@ function buildPagination() {
 
   html += `<button class="page-btn" data-move="1" ${
     CURRENT_PAGE === totalPages ? 'disabled' : ''
-  }>Next</button>`;
+  }>→</button>`;
 
   pag.innerHTML = html;
 
