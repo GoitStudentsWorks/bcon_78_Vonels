@@ -85,12 +85,12 @@
     justify-content: center;
     cursor: pointer;
     transition: background-color 0.3s;
-    border: 1px solid var(--opacity-white-50);
-    border-radius: 8px;
+    border: 1px solid var(--opacity-white-100);
     padding: 12px;
     width: 48px;
     height: 48px;
     background: transparent;
+    -webkit-text-fill-color: aliceblue;
   }
 
   .feedback-prev-btn:hover,
@@ -120,7 +120,7 @@
   }
 
   .feedback-pagination .swiper-pagination-bullet-active {
-    background: #8a2be2 !important;
+    background: #fff !important;
     opacity: 1 !important;
   }
   /* Стилізація ЗІРОЧОК  */
