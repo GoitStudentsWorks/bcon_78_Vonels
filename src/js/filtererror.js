@@ -4,6 +4,7 @@ import {
   showArtistsLoader,
   hideArtistsLoader,
   clearArtistsList,
+  hideArtistsLoadMoreButton,
 } from './artisterror';
 
 const BASE_URL = 'https://sound-wave.b.goit.study';
@@ -161,6 +162,7 @@ async function fetchArtists(page = 1) {
       if (elements.emptyState) {
         elements.emptyState.classList.remove('is-hidden');
       }
+      hideArtistsLoadMoreButton();
     } else {
       createArtistCards(artists);
     }
@@ -172,6 +174,7 @@ async function fetchArtists(page = 1) {
     if (elements.emptyState) {
       elements.emptyState.classList.remove('is-hidden');
     }
+    hideArtistsLoadMoreButton();
     return { artists: [], totalArtists: 0 };
   } finally {
     hideArtistsLoader();
@@ -339,10 +342,22 @@ function initEventListeners() {
   }
 
   if (elements.filtersToggleBtn && elements.filtersPanel) {
-    elements.filtersToggleBtn.addEventListener('click', () => {
-      const isHidden = elements.filtersPanel.classList.contains('is-hidden');
-      elements.filtersPanel.classList.toggle('is-hidden', !isHidden);
-      elements.filtersToggleBtn.classList.toggle('is-open', isHidden);
+    elements.filtersToggleBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      const isOpen = elements.filtersPanel.classList.contains('is-open');
+      elements.filtersPanel.classList.toggle('is-open', !isOpen);
+      elements.filtersToggleBtn.classList.toggle('is-open', !isOpen);
+    });
+
+    // Close panel when clicking outside (keeps selected filters)
+    document.addEventListener('click', e => {
+      if (
+        !e.target.closest('.filters-panel') &&
+        !e.target.closest('.filters-toggle-btn')
+      ) {
+        elements.filtersPanel.classList.remove('is-open');
+        elements.filtersToggleBtn.classList.remove('is-open');
+      }
     });
   }
 
@@ -356,11 +371,17 @@ function initEventListeners() {
   });
 
   elements.filterDropdownBtns?.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const content = btn
-        .closest('.filter-dropdown')
-        ?.querySelector('.filter-dropdown-content');
-      if (content) content.classList.toggle('is-hidden');
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const dropdown = btn.closest('.filter-dropdown');
+      const content = dropdown?.querySelector('.filter-dropdown-content');
+      
+      // Close other dropdowns
+      document.querySelectorAll('.filter-dropdown-content').forEach(other => {
+        if (other !== content) other.classList.remove('is-open');
+      });
+      
+      if (content) content.classList.toggle('is-open');
     });
   });
 
@@ -368,7 +389,7 @@ function initEventListeners() {
   document.addEventListener('click', e => {
     if (!e.target.closest('.filter-dropdown')) {
       document.querySelectorAll('.filter-dropdown-content').forEach(content => {
-        content.classList.add('is-hidden');
+        content.classList.remove('is-open');
       });
     }
   });

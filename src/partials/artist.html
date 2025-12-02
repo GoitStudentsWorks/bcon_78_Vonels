@@ -9,22 +9,23 @@
         <button type="button" class="filters-toggle-btn">
           <span>Search and Filters</span>
           <svg class="filters-toggle-icon" width="16" height="16">
-            <use href="../img/sprite.svg#icon-listdamp"></use>
+            <use href="./img/sprite.svg#icon-listdamp"></use>
           </svg>
         </button>
       </div>
 
-      <div class="filters-panel is-hidden">
+      <div class="filters-panel">
         <div class="filters-panel-content">
           <div class="search-wrapper">
             <svg class="search-icon" width="20" height="20">
-              <use href="../img/sprite.svg#icon-search"></use>
+              <use href="./img/sprite.svg#icon-search"></use>
             </svg>
             <input
               type="text"
               class="search-input"
               placeholder="Search"
               id="artist-search"
+              autocomplete="off"
             />
           </div>
 
@@ -36,7 +37,7 @@
             >
               <span class="filter-group-label">Sorting</span>
               <svg class="filter-group-icon" width="16" height="16">
-                <use href="../img/sprite.svg#icon-listdamp"></use>
+                <use href="./img/sprite.svg#icon-listdamp"></use>
               </svg>
             </button>
             <div class="filter-group-content is-hidden">
@@ -62,7 +63,7 @@
             >
               <span class="filter-group-label">Genre</span>
               <svg class="filter-group-icon" width="16" height="16">
-                <use href="../img/sprite.svg#icon-listdamp"></use>
+                <use href="./img/sprite.svg#icon-listdamp"></use>
               </svg>
             </button>
             <div class="filter-group-content is-hidden">
@@ -81,13 +82,14 @@
       <div class="filters-row">
         <div class="search-wrapper">
           <svg class="search-icon" width="20" height="20">
-            <use href="../img/sprite.svg#icon-search"></use>
+            <use href="./img/sprite.svg#icon-search"></use>
           </svg>
           <input
             type="text"
             class="search-input"
             placeholder="Search"
             id="artist-search-desktop"
+            autocomplete="off"
           />
         </div>
 
@@ -99,10 +101,10 @@
           >
             <span class="filter-dropdown-label">Sorting</span>
             <svg class="filter-dropdown-icon" width="16" height="16">
-              <use href="../img/sprite.svg#icon-listdamp"></use>
+              <use href="./img/sprite.svg#icon-listdamp"></use>
             </svg>
           </button>
-          <div class="filter-dropdown-content is-hidden">
+          <div class="filter-dropdown-content">
             <ul class="filter-options-list sort-options-desktop">
               <li class="filter-option-item active" data-sort="">Default</li>
               <li class="filter-option-item" data-sort="name_asc">A-Z</li>
@@ -119,10 +121,10 @@
           >
             <span class="filter-dropdown-label">Genre</span>
             <svg class="filter-dropdown-icon" width="16" height="16">
-              <use href="../img/sprite.svg#icon-listdamp"></use>
+              <use href="./img/sprite.svg#icon-listdamp"></use>
             </svg>
           </button>
-          <div class="filter-dropdown-content is-hidden">
+          <div class="filter-dropdown-content">
             <ul class="filter-options-list genre-options-desktop"></ul>
           </div>
         </div>
@@ -136,7 +138,7 @@
         <div class="empty-state is-hidden">
           <div class="empty-state-icon">
             <svg width="34" height="34">
-              <use href="../img/sprite.svg#icon-filter-error"></use>
+              <use href="./img/sprite.svg#icon-filter-error"></use>
             </svg>
           </div>
           <h3 class="empty-state-title">Silence on the stage...</h3>
@@ -152,10 +154,10 @@
         <button type="button" class="artists-load-more-btn is-hidden">
           Load More
           <svg class="model-btm-icon" width="14" height="14">
-            <use href="../img/sprite.svg#icon-down"></use>
+            <use href="./img/sprite.svg#icon-down"></use>
           </svg>
         </button>
-        <span class="artists-loader is-hiden">Loading Artists...</span>
+        <span class="artists-loader is-hidden">Loading Artists...</span>
       </div>
     </div>
   </div>
