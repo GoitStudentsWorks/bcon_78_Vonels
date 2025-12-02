@@ -193,6 +193,7 @@
 
     .hero-section::after {
         height: 137px;
+        bottom: -2;
     }
 
     .col-left {
