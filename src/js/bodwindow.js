@@ -2,11 +2,7 @@ import axios from 'axios';
 
 /* ============================================================
    HELPERS
-<<<<<<< HEAD
-   ============================================================ */
-=======
 ============================================================ */
->>>>>>> main
 
 function formatDuration(ms) {
   const totalSeconds = Math.floor(ms / 1000);
@@ -32,20 +28,11 @@ function hideLoader() {
 }
 
 /* ============================================================
-<<<<<<< HEAD
-   BIOGRAPHY TOGGLE
-   ============================================================ */
-
-function createBiographyHTML(text, limit = 250) {
-  if (!text) text = 'Information missing';
-
-=======
    BIO Toggle
 ============================================================ */
 
 function createBiographyHTML(text, limit = 500) {
   if (!text) text = 'Information missing';
->>>>>>> main
   const tooLong = text.length > limit;
   const shortText = text.slice(0, limit);
 
@@ -54,17 +41,10 @@ function createBiographyHTML(text, limit = 500) {
     ${
       tooLong
         ? `<button id="bio-toggle" class="bio-toggle-btn">
-<<<<<<< HEAD
-            <svg class="modal-icon" width="20" height="20">
-              <use href="../img/sprite.svg#icon-dots-horizontal"></use>
-            </svg>
-          </button>`
-=======
               <svg class="modal-icon" width="20" height="20">
                 <use href="/img/sprite.svg#icon-dots-horizontal"></use>
               </svg>
            </button>`
->>>>>>> main
         : ''
     }
   `;
@@ -85,92 +65,38 @@ function setupBioToggle(fullText) {
       btn.innerHTML = `
         <svg class="modal-icon" width="20" height="20">
           <use href="../img/sprite.svg#icon-modal-up"></use>
-<<<<<<< HEAD
-        </svg>
-      `;
-=======
         </svg>`;
->>>>>>> main
     } else {
       textElem.textContent = fullText.slice(0, 250);
       btn.innerHTML = `
         <svg class="modal-icon" width="20" height="20">
           <use href="../img/sprite.svg#icon-dots-horizontal"></use>
-<<<<<<< HEAD
-        </svg>
-      `;
-=======
         </svg>`;
->>>>>>> main
     }
   });
 }
 
 /* ============================================================
-<<<<<<< HEAD
-   MODAL CONTROLS
-   ============================================================ */
-
-function attachModalListeners() {
-  const overlay = document.querySelector('.modal-overlay');
-  const modal = document.querySelector('.modal');
-  const exitBtn = document.querySelector('.btn-exit');
-
-  if (!overlay || !modal || !exitBtn) {
-    console.error('Modal elements not found in DOM');
-    return;
-  }
-
-  function closeModal() {
-    overlay.classList.remove('is-open');
-  }
-
-  exitBtn.addEventListener('click', closeModal);
-
-  overlay.addEventListener('click', e => {
-    if (e.target === overlay) closeModal();
-  });
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeModal();
-  });
-}
-
-/* ============================================================
-   API
-   ============================================================ */
-=======
    API
 ============================================================ */
->>>>>>> main
 
 const api = axios.create({
   baseURL: 'https://sound-wave.b.goit.study/api',
 });
 
 /* ============================================================
-<<<<<<< HEAD
-   MAIN RENDER FUNCTION
-   ============================================================ */
-=======
    INIT
 ============================================================ */
->>>>>>> main
 
 export async function init(id) {
   try {
     showLoader();
-<<<<<<< HEAD
-    const container = document.querySelector('.modal-overlay');
-    container.classList.add('is-open');
-=======
     const overlay = document.querySelector('.modal-overlay');
     const container = document.querySelector('.modal');
     document.body.classList.add('modal-open');
     container.innerHTML = '';
     overlay.classList.add('is-open');
 
->>>>>>> main
     const { data } = await api.get(`/artists/${id}/albums`);
     createArtistModal(data);
   } catch (err) {
@@ -181,17 +107,12 @@ export async function init(id) {
 }
 
 /* ============================================================
-<<<<<<< HEAD
-   BUILD MODAL HTML
-   ============================================================ */
-=======
    MAIN MODAL HTML
 ============================================================ */
 
 let CURRENT_PAGE = 1;
 const ALBUMS_PER_PAGE = 8;
 let GLOBAL_ALBUMS = [];
->>>>>>> main
 
 function createArtistModal(artist) {
   const {
@@ -207,65 +128,12 @@ function createArtistModal(artist) {
     albumsList,
   } = artist;
 
-<<<<<<< HEAD
-  const container = document.querySelector('.modal');
-  container.innerHTML = '';
-
-  const genresHTML = genres?.map(g => `<span>${g}</span>`).join(' ') || '';
-
-  /* --- Albums --- */
-  const albumsHTML = (albumsList || [])
-    .slice(0, 8)
-    .map(({ strAlbum, tracks }) => {
-      const tracksHTML =
-        tracks
-          ?.map(
-            ({ strTrack, intDuration, movie }) => `
-          <li class="track">
-            <span class="title">${strTrack}</span>
-            <span class="time">${formatDuration(intDuration)}</span>
-            ${
-              movie
-                ? `<a href="${movie}" class="yt-btn" target="_blank">
-                    <svg class="modal-icon-yt" width="20" height="20">
-                      <use href="/img/sprite.svg#icon-YouTube"></use>
-                    </svg>
-                  </a>`
-                : ''
-            }
-          </li>`
-          )
-          .join('') || '<li>No tracks found</li>';
-
-      return `
-        <div class="album-card">
-          <h3>${strAlbum}</h3>
-          <div class="table-header">
-            <span>Track</span>
-            <span>Time</span>
-            <span>Link</span>
-          </div>
-          <ul class="track-list">${tracksHTML}</ul>
-        </div>
-      `;
-    })
-    .reduce((acc, item, i, arr) => {
-      if (i % 2 === 0) acc.push(`<div class="albums-thumb">${item}`);
-      else acc[acc.length - 1] += item + `</div>`;
-      if (i === arr.length - 1 && i % 2 === 0) acc[acc.length - 1] += `</div>`;
-      return acc;
-    }, [])
-    .join('');
-
-  /* --- FINAL MARKUP --- */
-=======
   GLOBAL_ALBUMS = albumsList || [];
   CURRENT_PAGE = 1;
 
   const container = document.querySelector('.modal');
   const genresHTML = genres?.map(g => `<span>${g}</span>`).join(' ') || '';
 
->>>>>>> main
   container.innerHTML = `
     <button class="btn-exit" type="button">
       <svg class="modal-icon-exit" width="20" height="20">
@@ -276,13 +144,9 @@ function createArtistModal(artist) {
     <h1 class="actor-name">${strArtist}</h1>
 
     <div class="actor">
-<<<<<<< HEAD
-      <img class="actor-img" src="${strArtistThumb}" alt="${strArtist}" />
-=======
       <div class="actor-img-wrapper" style="position:relative;">
         <img class="actor-img" src="${strArtistThumb}" alt="${strArtist}" />
       </div>
->>>>>>> main
 
       <ul class="actor-info">
         <div class="actor-info-container">
@@ -305,19 +169,13 @@ function createArtistModal(artist) {
 
     <div class="albums">
       <h2>Albums</h2>
-<<<<<<< HEAD
-      <div class="albums-cards">${albumsHTML}</div>
-=======
       <div class="albums-cards" id="albums-container"></div>
       <div class="pagination" id="pagination"></div>
->>>>>>> main
     </div>
   `;
 
   setupBioToggle(strBiographyEN);
   attachModalListeners();
-<<<<<<< HEAD
-=======
 
   const wrapper = container.querySelector('.actor-img-wrapper');
   setupHoverVideo(wrapper, albumsList);
@@ -504,5 +362,4 @@ function attachModalListeners() {
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeModal();
   });
->>>>>>> main
 }

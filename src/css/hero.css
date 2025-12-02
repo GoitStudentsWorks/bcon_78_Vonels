@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-.container {
-    margin-right: auto;
-}
-
-@media only screen and (min-width: 320px) {
-=======
 @media only screen and (min-width: 320px) {
     .hero-section {
         margin-top: 64px;
@@ -36,7 +29,6 @@
         height: 106px;
     }
 
->>>>>>> main
     .hero-title {
         font-weight: 700;
         font-size: 48px;
@@ -44,13 +36,8 @@
         letter-spacing: -0.01em;
         color: var(--color-scheme-1-text);
         text-align: left;
-<<<<<<< HEAD
-        margin-top: 64px;
-        margin-bottom: 20px;
-=======
         margin-bottom: 20px;
         padding-right: 40px;
->>>>>>> main
     }
 
     .hero-text {
@@ -77,16 +64,6 @@
         height: 47px;
         box-shadow: 0 1px 2px 0 var(--opacity-neutral-darkest-5), inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px var(--opacity-neutral-darkest-15), inset 0 2px 1px 0 rgba(255, 255, 255, 0.25), inset 0 32px 24px 0 var(--opacity-white-5);
         background: var(--color-affair);
-<<<<<<< HEAD
-    }
-
-
-}
-
-@media only screen and (min-width: 768px) {}
-
-@media only screen and (min-width: 1440px) {}
-=======
         margin-bottom: 64px;
     }
 
@@ -256,4 +233,3 @@
         width: 312px;
     }
 }
->>>>>>> main

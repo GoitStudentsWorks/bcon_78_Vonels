@@ -4,10 +4,6 @@ import {
   showArtistsLoader,
   hideArtistsLoader,
   clearArtistsList,
-<<<<<<< HEAD
-  hideArtistsLoadMoreButton,
-=======
->>>>>>> main
 } from './artisterror';
 
 const BASE_URL = 'https://sound-wave.b.goit.study';
@@ -126,10 +122,6 @@ async function fetchArtists(page = 1) {
   }
 
   showArtistsLoader();
-<<<<<<< HEAD
-  hideArtistsLoadMoreButton();
-=======
->>>>>>> main
 
   const params = { limit: PER_PAGE, page };
 

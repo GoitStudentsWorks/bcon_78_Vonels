@@ -77,10 +77,5 @@ loadMoreBtn.addEventListener('click', async () => {
   currentArtistPage += 1;
   await fetchArtists();
 });
-<<<<<<< HEAD
-// Auto-fetch disabled - filtererror.js now handles initial loading
-// fetchArtists();
-=======
 
 fetchArtists();
->>>>>>> main

@@ -26,23 +26,11 @@
     text-align: center;
     padding: 40px 20px;
     color: #fff;
-<<<<<<< HEAD
-    background: var(--color-scheme-1-background);
-=======
 
->>>>>>> main
     border-radius: 8px;
   }
   .swiper-wrapper {
     color: #fff;
-<<<<<<< HEAD
-  }
-  /* Стилізація ЗІРОЧОК  */
-  .star-rating-container {
-    margin-bottom: 20px;
-    font-size: 24px;
-=======
->>>>>>> main
   }
 
   .feedback-text {

@@ -1,23 +1,10 @@
 .about-container {
   display: flex;
   align-items: center;
-<<<<<<< HEAD
-  justify-content: flex-start;
-=======
->>>>>>> main
   flex-direction: column;
   gap: 48px;
   padding: 64px 20px;
 }
-<<<<<<< HEAD
-.container-about-inf {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  gap: 20px;
-  max-width: 280px;
-}
-=======
 
 .container-about-inf {
   display: flex;
@@ -30,30 +17,10 @@
   width: 288px;
   height: 169px;
 }
->>>>>>> main
 .svg-icon-about {
   width: 64px;
   height: 64px;
 }
-<<<<<<< HEAD
-.about-title {
-  font-family: var(--second-family);
-  font-weight: 700;
-  font-size: 44px;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  color: var(--color-scheme-1-text);
-}
-.about-text {
-  font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 1.5;
-  color: var(--color-scheme-1-text);
-}
-
-@media only screen and (min-width: 768px) {
-=======
 
 .about-title {
   font-weight: 700;
@@ -126,16 +93,10 @@
 
 /* ===== MEDIA QUERIES ===== */
 @media (min-width: 768px) {
->>>>>>> main
   .about-container {
     gap: 80px;
   }
   .container-about-inf {
-<<<<<<< HEAD
-    gap: 24px;
-    max-width: 704px;
-  }
-=======
     max-width: 704px;
   }
   .about-picture {
@@ -145,32 +106,18 @@
   .about-text {
     font-size: 20px;
   }
->>>>>>> main
   .svg-icon-about {
     width: 80px;
     height: 80px;
   }
-<<<<<<< HEAD
-
-  .about-text {
-    font-size: 20px;
-  }
-}
-@media only screen and (min-width: 1440px) {
-=======
 }
 
 @media (min-width: 1440px) {
->>>>>>> main
   .about-container {
     flex-direction: row;
     padding: 112px 64px;
   }
   .container-about-inf {
-<<<<<<< HEAD
-    flex-direction: column;
-=======
->>>>>>> main
     gap: 32px;
     max-width: 1312px;
   }
