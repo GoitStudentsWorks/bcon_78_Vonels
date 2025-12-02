@@ -4,6 +4,7 @@ const refs = {
   mobileMenu: document.querySelector('.menu-drive'),
   mobileLinks: document.querySelectorAll('.header-mobile-nav-link'),
   menuLogoLink: document.querySelector('.menu-drive .header-link-logo'),
+  desktopLinks: document.querySelectorAll('.header-list a'),
 };
 
 const toggleMenu = () => {
@@ -27,4 +28,15 @@ if (refs.mobileLinks.length > 0) {
 
 if (refs.menuLogoLink) {
   refs.menuLogoLink.addEventListener('click', toggleMenu);
+}
+
+if (refs.desktopLinks.length > 0) {
+  refs.desktopLinks.forEach(link => {
+    link.addEventListener('click', function (event) {
+      refs.desktopLinks.forEach(item => {
+        item.classList.remove('is-active');
+      });
+      event.currentTarget.classList.add('is-active');
+    });
+  });
 }

@@ -134,6 +134,7 @@ body {
         background-color: transparent;
         margin-bottom: 64px;
         border-color: transparent;
+        padding: 0;
     }
 
     .artists-load-more-btn {
