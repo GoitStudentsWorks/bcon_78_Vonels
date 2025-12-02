@@ -12,16 +12,16 @@
   margin-right: auto;
 }
 
-/* .header {
+.header {
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
   background-color: #060307;
-} */
+}
 
 .header-container {
-  height: 64px;
+  /* height: 64px; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,8 +29,14 @@
   padding-left: 26px;
 }
 
+.header-page-nav {
+  padding-top: 7px;
+  padding-bottom: 6px;
+}
+
 .header-logo-svg {
   fill: #fff;
+  display: block;
 }
 
 .header-list {
@@ -38,7 +44,7 @@
 }
 
 .header-link-logo {
-  display: inline-block;
+  display: block;
 }
 
 .header-nav-link {
@@ -48,6 +54,41 @@
   line-height: 1.5;
   color: #fff;
   display: inline-block;
+  transition: color 250ms ease-in-out;
+  /* padding: 20px 0; */
+  position: relative;
+  height: 27px;
+}
+
+.link-icon {
+  fill: none;
+  opacity: 0;
+  display: inline-block;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 250ms ease-in-out, fill 250ms ease-in-out;
+}
+
+.link-text {
+  opacity: 1;
+  transition: opacity 250ms ease-in-out;
+}
+
+.header-nav-link:focus .link-text {
+  opacity: 0;
+}
+
+.header-nav-link:focus .link-icon {
+  display: inline-block;
+  opacity: 1;
+  fill: #764191;
+}
+
+.header-nav-link:hover {
+  color: #764191;
 }
 
 .header-button-menu {
@@ -64,7 +105,7 @@
   width: 100%;
   height: 100%;
   background-color: #000;
-  z-index: 999;
+  z-index: 1001;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -123,6 +164,35 @@
   .header-button-menu {
     display: none;
   }
+
+  .header-container {
+    /* height: 72px; */
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 11px;
+    padding-bottom: 10px;
+  }
+
+  .header-page-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0px 64px;
+  }
+
+  .header-list {
+    display: flex;
+    gap: 32px;
+  }
+
+  .header-nav-link {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #fff;
+  }
 }
 
 @media only screen and (min-width: 1440px) {
@@ -130,5 +200,10 @@
     max-width: 1440px;
     padding-left: 64px;
     padding-right: 64px;
+  }
+
+  .header-page-nav {
+    padding-left: 0px;
+    padding-right: 0px;
   }
 }
