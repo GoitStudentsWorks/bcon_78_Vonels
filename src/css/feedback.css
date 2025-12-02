@@ -120,7 +120,7 @@
     color: #8a2be2;
   }
   .feedback-text {
-max-width: 284px;
+    max-width: 284px;
   }
 }
 
@@ -153,9 +153,8 @@ max-width: 284px;
     display: none;
   } */
 
-
   .feedback-text {
-      max-width: 516px;
+    max-width: 516px;
   }
 }
 
@@ -166,6 +165,3 @@ max-width: 284px;
     margin-left: auto;
   }
 }
-
-
-
