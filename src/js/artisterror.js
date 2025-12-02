@@ -2,7 +2,7 @@ const artistsList = document.querySelector('.artists-list');
 const loader = document.querySelector('.artists-loader');
 const loadMoreBtn = document.querySelector('.artists-load-more-btn');
 
-import {init} from './bodwindow';
+import { init } from './bodwindow';
 
 export function showArtistsLoader() {
   loader.classList.remove('is-hidden');
@@ -75,14 +75,15 @@ export function createArtistCards(artists) {
     })
     .join('');
 
-    artistsList.innerHTML = markup;
+  artistsList.innerHTML = markup;
 
-    document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('learn-more-btn')|| e.target.classList.contains('img-card')) {
-            const actorId = e.target.dataset.artistId;
-            init(actorId);
-  }
-});
+  document.addEventListener('click', e => {
+    if (
+      e.target.classList.contains('learn-more-btn') ||
+      e.target.classList.contains('img-card')
+    ) {
+      const actorId = e.target.dataset.artistId;
+      init(actorId);
+    }
+  });
 }
-
- 
