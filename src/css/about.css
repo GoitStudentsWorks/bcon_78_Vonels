@@ -3,7 +3,6 @@
   align-items: center;
   flex-direction: column;
   gap: 48px;
-  padding: 64px 20px;
 }
 
 .container-about-inf {
@@ -45,6 +44,7 @@
     inset 0 32px 24px 0 var(--opacity-white-5);
   background-color: var(--color-affair);
   border: none;
+  color: white;
 }
 .read-more-about:hover {
   opacity: 0.6;
@@ -94,14 +94,14 @@
 /* ===== MEDIA QUERIES ===== */
 @media (min-width: 768px) {
   .about-container {
-    gap: 80px;
+    gap: 24px;
   }
   .container-about-inf {
     max-width: 704px;
   }
   .about-picture {
-    width: 100%;
-    height: 100%;
+    width: 704px;
+    height: 413px;
   }
   .about-text {
     font-size: 20px;
@@ -116,9 +116,14 @@
   .about-container {
     flex-direction: row;
     padding: 112px 64px;
+    gap: 32px;
+  }
+  .about-picture {
+    width: 1600px;
+    height: 640px;
   }
   .container-about-inf {
-    gap: 32px;
+    gap: 24px;
     max-width: 1312px;
   }
   .about-title {

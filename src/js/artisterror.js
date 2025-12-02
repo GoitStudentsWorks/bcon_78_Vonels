@@ -2,7 +2,7 @@ const artistsList = document.querySelector('.artists-list');
 const loader = document.querySelector('.artists-loader');
 const loadMoreBtn = document.querySelector('.artists-load-more-btn');
 
-import {init} from './bodwindow';
+import { init } from './bodwindow';
 
 export function showArtistsLoader() {
   loader.classList.remove('is-hidden');
@@ -46,6 +46,7 @@ export function createArtistCards(artists) {
                         src="${artist.strArtistThumb || ''}" 
                         alt="${artist.strArtist || 'Artist Photo'}" 
                         loading="lazy"
+                        data-artist-id="${artist._id}"
                     >
 
                     ${createGenreElements(artist.genres)}
@@ -65,7 +66,7 @@ export function createArtistCards(artists) {
                     >
                         Learn More
                         <svg class="model-open-btm-icon" width="8" height="14">
-                            <use href="../img/sprite.svg#icon-con"></use>
+                            <use href="./img/sprite.svg#icon-con"></use>
                         </svg>
 
                     </button>
@@ -74,14 +75,15 @@ export function createArtistCards(artists) {
     })
     .join('');
 
-    artistsList.insertAdjacentHTML('beforeend', markup);
+  artistsList.innerHTML = markup;
 
-    document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('learn-more-btn')) {
-            const actorId = e.target.dataset.artistId;
-            init(actorId);
-  }
-});
+  document.addEventListener('click', e => {
+    if (
+      e.target.classList.contains('learn-more-btn') ||
+      e.target.classList.contains('img-card')
+    ) {
+      const actorId = e.target.dataset.artistId;
+      init(actorId);
+    }
+  });
 }
-
- 
