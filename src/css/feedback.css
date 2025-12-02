@@ -119,6 +119,9 @@
   .star-on-png {
     color: #8a2be2;
   }
+  .feedback-text {
+max-width: 284px;
+  }
 }
 
 @media only screen and (max-width: 767px) {
@@ -143,4 +146,28 @@
     background: transparent;
     -webkit-text-fill-color: aliceblue;
   }
+  /* .swiper-button-prev:after {
+    display: none;
+  }
+  .swiper-button-next:after {
+    display: none;
+  } */
+  .left {
+    color: #fff;
+  }
+
+  .feedback-text {
+      max-width: 516px;
+  }
 }
+
+@media only screen and (min-width: 768px) {
+  .feedback-text {
+    max-width: 868px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+
+
