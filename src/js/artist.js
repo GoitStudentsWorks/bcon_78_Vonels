@@ -50,7 +50,7 @@ async function fetchArtists(page = 1, bool = false) {
       renderPagination(page, totalArtistPages)
 
       if (bool) {
-          document.querySelector('.artists-list').scrollIntoView({ behavior: 'smooth' });
+          document.querySelector('.section-subtitle').scrollIntoView({ behavior: 'smooth' });
       }
 
     if (artists.length === 0) {
