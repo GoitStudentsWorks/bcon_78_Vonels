@@ -28,9 +28,7 @@ function getElements() {
     resetFiltersBtn: document.querySelector('.reset-filters-btn'),
     sortOptionsDesktop: document.querySelector('.sort-options-desktop'),
     genreOptionsDesktop: document.querySelector('.genre-options-desktop'),
-    filterAccordionHeaders: document.querySelectorAll(
-      '.filter-accordion-header'
-    ),
+    filterDropdownBtns: document.querySelectorAll('.filter-dropdown-btn'),
     filterGroupHeaders: document.querySelectorAll('.filter-group-header'),
   };
 }
@@ -357,13 +355,22 @@ function initEventListeners() {
     });
   });
 
-  elements.filterAccordionHeaders?.forEach(header => {
-    header.addEventListener('click', () => {
-      const content = header
-        .closest('.filter-accordion')
-        ?.querySelector('.filter-accordion-content');
+  elements.filterDropdownBtns?.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const content = btn
+        .closest('.filter-dropdown')
+        ?.querySelector('.filter-dropdown-content');
       if (content) content.classList.toggle('is-hidden');
     });
+  });
+
+  // Close dropdowns when clicking outside
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.filter-dropdown')) {
+      document.querySelectorAll('.filter-dropdown-content').forEach(content => {
+        content.classList.add('is-hidden');
+      });
+    }
   });
 }
 
