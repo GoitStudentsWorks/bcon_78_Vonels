@@ -64,13 +64,13 @@ function setupBioToggle(fullText) {
       textElem.textContent = fullText;
       btn.innerHTML = `
         <svg class="modal-icon" width="20" height="20">
-          <use href="../img/sprite.svg#icon-modal-up"></use>
+          <use href="/img/sprite.svg#icon-modal-up"></use>
         </svg>`;
     } else {
       textElem.textContent = fullText.slice(0, 250);
       btn.innerHTML = `
         <svg class="modal-icon" width="20" height="20">
-          <use href="../img/sprite.svg#icon-dots-horizontal"></use>
+          <use href="/img/sprite.svg#icon-dots-horizontal"></use>
         </svg>`;
     }
   });
@@ -252,7 +252,7 @@ function buildAlbumsHTML(list) {
 function buildPagination() {
   const totalPages = Math.ceil(GLOBAL_ALBUMS.length / ALBUMS_PER_PAGE);
   const pag = document.querySelector('#pagination');
-  const maxVisibleButtons = 5;
+  const maxVisibleButtons = 3;
 
   let html = `<button class="page-btn" data-move="-1" ${
     CURRENT_PAGE === 1 ? 'disabled' : ''

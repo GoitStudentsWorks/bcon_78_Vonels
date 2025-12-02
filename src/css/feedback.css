@@ -41,6 +41,7 @@
     letter-spacing: -0.01em;
     text-align: center;
     color: var(--color-scheme-1-text);
+    margin-bottom: 32px;
   }
 
   .feedback-author {
@@ -78,20 +79,6 @@
     margin-top: 40px;
     color: white;
   }
-  .feedback-prev-btn,
-  .feedback-next-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    border: 1px solid var(--opacity-white-50);
-    border-radius: 8px;
-    padding: 12px;
-    width: 48px;
-    height: 48px;
-    background: transparent;
-  }
 
   .feedback-prev-btn:hover,
   .feedback-next-btn:hover {
@@ -120,7 +107,7 @@
   }
 
   .feedback-pagination .swiper-pagination-bullet-active {
-    background: #8a2be2 !important;
+    background: #fff !important;
     opacity: 1 !important;
   }
   /* Стилізація ЗІРОЧОК  */
@@ -132,17 +119,28 @@
   .star-on-png {
     color: #8a2be2;
   }
-
-  /* .feedback-next-btn::after, .feedback-prev-btn::after {
-display: none;
-} */
-  /* .feedback-next-btn {
-mask-image: url("/src/img/sprite.svg#icon-rigth");
-color: #fff;
 }
 
-.feedback-prev-btn {
-mask-image: url("../img/sprite.svg#icon-left");
-fill: #fff;
-} */
+@media only screen and (max-width: 767px) {
+  .feedback-prev-btn,
+  .feedback-next-btn {
+    visibility: hidden;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .feedback-prev-btn,
+  .feedback-next-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: 1px solid var(--opacity-white-100);
+    padding: 12px;
+    width: 48px;
+    height: 48px;
+    background: transparent;
+    -webkit-text-fill-color: aliceblue;
+  }
 }
