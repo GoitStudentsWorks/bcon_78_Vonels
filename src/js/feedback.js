@@ -1,5 +1,8 @@
 import Swiper from 'swiper/bundle';
 import axios from 'axios';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 const BASE_URL = 'https://sound-wave.b.goit.study';
 
@@ -68,15 +71,15 @@ async function updateFeedbacks() {
       )
       .join('');
 
-   feedbacks.forEach((f, index) => {
+    feedbacks.forEach((f, index) => {
       const roundedScore = Math.round(
-        typeof f.rating === "number" ? f.rating : 0
+        typeof f.rating === 'number' ? f.rating : 0
       );
 
       $(`#star-${index}`).raty({
         score: roundedScore,
         readOnly: true,
-        starType: "i",
+        starType: 'i',
       });
     });
 
