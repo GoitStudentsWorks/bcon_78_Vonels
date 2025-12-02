@@ -482,7 +482,7 @@
 
   .filters-desktop .search-wrapper {
     flex: 1;
-    max-width: 400px;
+    max-width: 600px;
   }
 
   .filters-desktop .search-icon {
@@ -619,6 +619,7 @@
   }
 
   .filters-desktop .reset-btn {
+    width: auto;
     height: 48px;
     padding: 8px 24px;
     margin-left: auto;
@@ -626,6 +627,7 @@
     border: 1px solid var(--opacity-white-20);
     border-radius: 12px;
     white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .filters-desktop .reset-btn:hover {
