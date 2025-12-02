@@ -3,7 +3,6 @@
   align-items: center;
   flex-direction: column;
   gap: 48px;
-  padding: 64px 20px;
 }
 
 .container-about-inf {
@@ -120,8 +119,8 @@
     gap: 32px;
   }
   .about-picture {
-    width: 640px;
-    height: 645px;
+    width: 1600px;
+    height: 640px;
   }
   .container-about-inf {
     gap: 24px;
