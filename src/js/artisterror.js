@@ -29,7 +29,7 @@ function createGenreElements(genres) {
     .map(genre => {
       return `<span class="genre-tag">${genre}</span>`;
     })
-    .join('');
+    .join(' ');
 
   return `<div class="artist-genres">${tags}</div>`;
 }
@@ -46,6 +46,7 @@ export function createArtistCards(artists) {
                         src="${artist.strArtistThumb || ''}" 
                         alt="${artist.strArtist || 'Artist Photo'}" 
                         loading="lazy"
+                        data-artist-id="${artist._id}"
                     >
 
                     ${createGenreElements(artist.genres)}
@@ -77,7 +78,7 @@ export function createArtistCards(artists) {
     artistsList.innerHTML = markup;
 
     document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('learn-more-btn')) {
+        if (e.target.classList.contains('learn-more-btn')|| e.target.classList.contains('img-card')) {
             const actorId = e.target.dataset.artistId;
             init(actorId);
   }
