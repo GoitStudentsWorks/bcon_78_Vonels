@@ -42,7 +42,7 @@ function createBiographyHTML(text, limit = 500) {
       tooLong
         ? `<button id="bio-toggle" class="bio-toggle-btn">
               <svg class="modal-icon" width="20" height="20">
-                <use href="./img/sprite.svg#icon-dots-horizontal"></use>
+                <use href="../img/sprite.svg#icon-dots-horizontal"></use>
               </svg>
            </button>`
         : ''
@@ -64,13 +64,13 @@ function setupBioToggle(fullText) {
       textElem.textContent = fullText;
       btn.innerHTML = `
         <svg class="modal-icon" width="20" height="20">
-          <use href="./img/sprite.svg#icon-modal-up"></use>
+          <use href="../img/sprite.svg#icon-modal-up"></use>
         </svg>`;
     } else {
       textElem.textContent = fullText.slice(0, 250);
       btn.innerHTML = `
         <svg class="modal-icon" width="20" height="20">
-          <use href="./img/sprite.svg#icon-dots-horizontal"></use>
+          <use href="../img/sprite.svg#icon-dots-horizontal"></use>
         </svg>`;
     }
   });
@@ -137,7 +137,7 @@ function createArtistModal(artist) {
   container.innerHTML = `
     <button class="btn-exit" type="button">
       <svg class="modal-icon-exit" width="20" height="20">
-        <use href="./img/sprite.svg#icon-close"></use>
+        <use href="../img/sprite.svg#icon-close"></use>
       </svg>
     </button>
 
@@ -216,7 +216,7 @@ function buildAlbumsHTML(list) {
             t.movie
               ? `<a href="${t.movie}" class="yt-btn" target="_blank">
                     <svg class="modal-icon-yt" width="20" height="20">
-                      <use href="./img/sprite.svg#icon-YouTube"></use>
+                      <use href="../img/sprite.svg#icon-YouTube"></use>
                     </svg>
                 </a>`
               : ''
