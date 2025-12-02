@@ -86,14 +86,11 @@ body {
 
     .img-card {
         border-radius: 16px;
-        width: 288px;
+        width: 100%;
         height: 177px;
         margin-bottom: 24px;
-        /* border-radius: 16px;
-        margin-bottom: 24px;
         object-fit: cover;
-        width: 100%;
-        height: 177px; */
+        object-position: top;
     }
 
     .genre-tag {
@@ -158,11 +155,43 @@ body {
         color: var(--color-white);
     }
 
-    /* .artist-genres {
-        display: flex;
-        gap: 16px;
-    } */
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            gap: 4px;
+            margin-top: 24px;
+        }
     
+        .paginationBtn {
+            border-radius: 12px;
+            padding: 4px 8px;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--color-white);
+            background: var(--opacity-white-5);
+            cursor: pointer;
+            border: none;
+            transition: 0.25s ease;
+        }
+    
+        .paginationBtn:hover:not(:disabled) {
+            background: var(--opacity-white-10);
+        }
+    
+        .paginationBtn:disabled {
+            opacity: 0.4;
+            cursor: default;
+        }
+    
+        .paginationBtn.active {
+            box-shadow: 0 1px 2px 0 var(--opacity-neutral-darkest-5),
+                inset 0 -2px 1px 0 var(--opacity-neutral-darkest-5),
+                inset 0 0 0 1px var(--opacity-white-10);
+            background: var(--opacity-white-10);
+        }   
 }
 
 @media only screen and (min-width: 768px) {
@@ -181,8 +210,10 @@ body {
 
     .img-card {
         border-radius: 16px;
-        width: 704px;
+        width: 100%;
         height: 432px;
+        object-fit: cover;
+        object-position: top;
     }
 
     .learn-more-btn {
@@ -194,10 +225,19 @@ body {
         padding: 10px 24px;
         width: 340px;
         height: 47px;
-box-shadow: 0 1px 2px 0 var(--opacity-neutral-darkest-5), inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px var(--opacity-neutral-darkest-15), inset 0 2px 1px 0 rgba(255, 255, 255, 0.25), inset 0 32px 24px 0 var(--opacity-white-5);
+
+        box-shadow: 0 1px 2px 0 var(--opacity-neutral-darkest-5), inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px var(--opacity-neutral-darkest-15), inset 0 2px 1px 0 rgba(255, 255, 255, 0.25), inset 0 32px 24px 0 var(--opacity-white-5);
         background: var(--color-affair);
     }
 
+        .pagination {
+            gap: 8px;
+        }
+    
+        .paginationBtn {
+            padding: 10px 24px;
+            font-size: 18px;
+        }
 }
 
 @media only screen and (min-width: 1440px) {
@@ -232,8 +272,10 @@ box-shadow: 0 1px 2px 0 var(--opacity-neutral-darkest-5), inset 0 -2px 1px 0 rgb
 
     .img-card {
         border-radius: 16px;
-        width: 472px;
-        height: 290px;
+        width: 100%;
+        height: 393px;
+        object-fit: cover;
+        object-position: top;
     }
 
     .artists-load-more-btn {
@@ -243,3 +285,7 @@ box-shadow: 0 1px 2px 0 var(--opacity-neutral-darkest-5), inset 0 -2px 1px 0 rgb
         height: 47px;
     }
 }
+
+
+
+
