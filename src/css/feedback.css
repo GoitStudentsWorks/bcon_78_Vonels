@@ -1,6 +1,7 @@
 @media only screen and (min-width: 320px) {
   section {
     color: #fff;
+    padding: 30px 12px;
   }
 
   .is-hidden {
@@ -144,15 +145,10 @@
 @media only screen and (min-width: 768px) {
   .feedback-prev-btn,
   .feedback-next-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     cursor: pointer;
     transition: background-color 0.3s;
     border: 1px solid var(--opacity-white-100);
     padding: 12px;
-    width: 48px;
-    height: 48px;
     background: transparent;
     -webkit-text-fill-color: aliceblue;
   }
@@ -173,5 +169,20 @@
     max-width: 868px;
     margin-right: auto;
     margin-left: auto;
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    border-radius: 10% !important;
+    width: 48px !important;
+    height: 48px !important;
+
+    outline: 1px solid #fff !important;
+  }
+
+  .swiper-button-prev svg,
+  .swiper-button-next svg {
+    width: 14px !important;
+    height: 14px !important;
   }
 }
