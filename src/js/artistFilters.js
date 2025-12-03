@@ -1,14 +1,13 @@
-import axios from 'axios';
+import { getArtists, fetchGenres, PER_PAGE } from './artist';
 import {
   createArtistCards,
   showArtistsLoader,
   hideArtistsLoader,
   clearArtistsList,
-} from './artisterror';
-import { renderPagination } from './artist';
-
-const BASE_URL = 'https://sound-wave.b.goit.study';
-const PER_PAGE = 8;
+  renderPagination,
+  clearPagination,
+  initPaginationListener,
+} from './artistUI';
 
 let currentPage = 1;
 let totalPages = 0;
@@ -32,38 +31,6 @@ function getElements() {
     filterDropdownBtns: document.querySelectorAll('.filter-dropdown-btn'),
     filterGroupHeaders: document.querySelectorAll('.filter-group-header'),
   };
-}
-
-async function fetchGenres() {
-  try {
-    const response = await axios.get(`${BASE_URL}/api/genres`);
-    const data = response.data;
-
-    if (Array.isArray(data)) {
-      return data.map(item => {
-        if (typeof item === 'string') return item;
-        if (typeof item === 'object' && item !== null) {
-          return item.name || item.genre || item.title || String(item);
-        }
-        return String(item);
-      });
-    }
-
-    if (typeof data === 'object' && data !== null) {
-      return Object.values(data).map(item => {
-        if (typeof item === 'string') return item;
-        if (typeof item === 'object' && item !== null) {
-          return item.name || item.genre || item.title || String(item);
-        }
-        return String(item);
-      });
-    }
-
-    return [];
-  } catch (error) {
-    console.error('Error fetching genres:', error);
-    return [];
-  }
 }
 
 async function populateGenres() {
@@ -122,23 +89,14 @@ async function fetchArtists(page = 1) {
 
   showArtistsLoader();
 
-  const params = { limit: PER_PAGE, page };
+  const params = {};
 
-  if (selectedGenre) {
-    params.genre = selectedGenre;
-  }
-
-  if (searchQuery) {
-    params.name = searchQuery;
-  }
-
-  if (sortOrder) {
-    params.sortName = sortOrder === 'name_asc' ? 'asc' : 'desc';
-  }
+  if (selectedGenre) params.genre = selectedGenre;
+  if (searchQuery) params.name = searchQuery;
+  if (sortOrder) params.sortName = sortOrder === 'name_asc' ? 'asc' : 'desc';
 
   try {
-    const response = await axios.get(`${BASE_URL}/api/artists`, { params });
-    const data = response.data;
+    const data = await getArtists(page, params);
     const artists = data.artists || [];
     const totalArtists = data.totalArtists || 0;
     totalPages = Math.ceil(totalArtists / PER_PAGE);
@@ -146,15 +104,11 @@ async function fetchArtists(page = 1) {
 
     clearArtistsList();
 
-    const paginationEl = document.querySelector('.pagination');
-
     if (artists.length === 0 && page === 1) {
       if (elements.emptyState) {
         elements.emptyState.classList.remove('is-hidden');
       }
-      if (paginationEl) {
-        paginationEl.innerHTML = '';
-      }
+      clearPagination();
     } else {
       createArtistCards(artists);
       renderPagination(page, totalPages);
@@ -167,10 +121,7 @@ async function fetchArtists(page = 1) {
     if (elements.emptyState) {
       elements.emptyState.classList.remove('is-hidden');
     }
-    const paginationEl = document.querySelector('.pagination');
-    if (paginationEl) {
-      paginationEl.innerHTML = '';
-    }
+    clearPagination();
     return { artists: [], totalArtists: 0 };
   } finally {
     hideArtistsLoader();
@@ -200,9 +151,7 @@ function resetFilters() {
   if (elements.genreOptionsDesktop) {
     elements.genreOptionsDesktop
       .querySelectorAll('.filter-option-item')
-      .forEach(item => {
-        item.classList.remove('active');
-      });
+      .forEach(item => item.classList.remove('active'));
     const defaultItem =
       elements.genreOptionsDesktop.querySelector('[data-genre=""]');
     if (defaultItem) defaultItem.classList.add('active');
@@ -345,7 +294,6 @@ function initEventListeners() {
       elements.filtersToggleBtn.classList.toggle('is-open', !isOpen);
     });
 
-    // Close panel when clicking outside (keeps selected filters)
     document.addEventListener('click', e => {
       if (
         !e.target.closest('.filters-panel') &&
@@ -371,17 +319,15 @@ function initEventListeners() {
       e.stopPropagation();
       const dropdown = btn.closest('.filter-dropdown');
       const content = dropdown?.querySelector('.filter-dropdown-content');
-      
-      // Close other dropdowns
+
       document.querySelectorAll('.filter-dropdown-content').forEach(other => {
         if (other !== content) other.classList.remove('is-open');
       });
-      
+
       if (content) content.classList.toggle('is-open');
     });
   });
 
-  // Close dropdowns when clicking outside
   document.addEventListener('click', e => {
     if (!e.target.closest('.filter-dropdown')) {
       document.querySelectorAll('.filter-dropdown-content').forEach(content => {
@@ -389,6 +335,8 @@ function initEventListeners() {
       });
     }
   });
+
+  initPaginationListener(fetchArtists);
 }
 
 async function init() {

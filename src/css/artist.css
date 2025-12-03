@@ -24,23 +24,6 @@ body {
   /* padding-bottom: 80px; */
 }
 
-.artists-load-more-btn {
-  display: block;
-  margin: 64px auto 0 auto;
-  border-radius: 12px;
-  padding: 10px 24px;
-  width: 170px;
-  height: 47px;
-
-  box-shadow: 0 1px 2px 0 var(--opacity-neutral-darkest-5),
-    inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2),
-    inset 0 0 0 1px var(--opacity-neutral-darkest-15),
-    inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
-    inset 0 32px 24px 0 var(--opacity-white-5);
-  background: var(--color-affair);
-  color: white;
-}
-
 .artists-loader {
   display: block;
   width: 150px;
@@ -70,10 +53,6 @@ body {
 @media only screen and (min-width: 320px) {
     .artist-section {
         padding: 64px 0;
-    }
-
-    .model-btm-icon {
-        margin-left: 12px;
     }
 
     .model-open-btm-icon {
@@ -135,21 +114,6 @@ body {
         margin-bottom: 64px;
         border-color: transparent;
         padding: 0;
-    }
-
-    .artists-load-more-btn {
-        padding: 10px 24px;
-        width: 288px;
-        height: 47px;
-
-        font-family: var(--font-family);
-        font-weight: 500;
-        font-size: 18px;
-        line-height: 150%;
-        color: var(--color-white);
-        display: flex;
-        justify-content: center;
-        align-items: center;
     }
 
     .scroll-btm-icon {
@@ -221,17 +185,7 @@ body {
         margin-bottom: 32px;
     }
 
-    .artists-load-more-btn {
-        border-radius: 12px;
-        padding: 10px 24px;
-        width: 340px;
-        height: 47px;
-
-        box-shadow: 0 1px 2px 0 var(--opacity-neutral-darkest-5), inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px var(--opacity-neutral-darkest-15), inset 0 2px 1px 0 rgba(255, 255, 255, 0.25), inset 0 32px 24px 0 var(--opacity-white-5);
-        background: var(--color-affair);
-    }
-
-        .pagination {
+    .pagination {
             gap: 8px;
         }
     
@@ -277,13 +231,6 @@ body {
         height: 393px;
         object-fit: cover;
         object-position: top;
-    }
-
-    .artists-load-more-btn {
-        border-radius: 12px;
-        padding: 10px 24px;
-        width: 170px;
-        height: 47px;
     }
 }
 
