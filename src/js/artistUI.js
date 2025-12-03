@@ -60,7 +60,7 @@ export function createArtistCards(artists) {
           >
             Learn More
             <svg class="model-open-btm-icon" width="8" height="14">
-              <use href="./img/sprite.svg#icon-con"></use>
+              <use href="img/sprite.svg#icon-con"></use>
             </svg>
           </button>
         </li>
