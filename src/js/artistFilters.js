@@ -341,14 +341,6 @@ function initEventListeners() {
 
 async function init() {
   try {
-    if (document.readyState === 'loading') {
-      await new Promise(resolve =>
-        document.addEventListener('DOMContentLoaded', resolve)
-      );
-    }
-
-    await new Promise(resolve => setTimeout(resolve, 300));
-
     initEventListeners();
     await populateGenres();
     initPanel();
