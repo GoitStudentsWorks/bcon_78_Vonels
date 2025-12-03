@@ -171,3 +171,6 @@ export function initPaginationListener(fetchCallback) {
       ?.scrollIntoView({ behavior: 'smooth' });
   });
 }
+
+
+
