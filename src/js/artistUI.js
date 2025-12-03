@@ -1,4 +1,5 @@
 import { init } from './bodwindow';
+import spritePath from '/img/sprite.svg';
 
 const artistsList = document.querySelector('.artists-list');
 const loader = document.querySelector('.artists-loader');
@@ -60,7 +61,7 @@ export function createArtistCards(artists) {
           >
             Learn More
             <svg class="model-open-btm-icon" width="8" height="14">
-              <use href="img/sprite.svg#icon-con"></use>
+              <use href="${spritePath}#icon-con"></use>
             </svg>
           </button>
         </li>
