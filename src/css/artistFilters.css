@@ -496,17 +496,6 @@
     align-items: center;
     gap: 16px;
     width: 100%;
-    padding: 16px 20px;
-    background: var(--color-neutral-darkest);
-    border-radius: 12px;
-  }
-
-  .artists-content-wrapper {
-    display: block;
-  }
-
-  .artists-main-content {
-    width: 100%;
   }
 
   .filters-desktop .search-wrapper {
@@ -572,8 +561,7 @@
     color: var(--color-white);
   }
 
-  .filter-dropdown:has(.filter-dropdown-content.is-open)
-    .filter-dropdown-icon {
+  .filter-dropdown:has(.filter-dropdown-content.is-open) .filter-dropdown-icon {
     transform: rotate(180deg);
   }
 

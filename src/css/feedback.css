@@ -54,18 +54,28 @@
 
   .feedback-submit-btn {
     padding: 12px 30px;
-    background-color: #8a2be2;
+
     color: #fff;
     border: none;
-    border-radius: 50px;
+    box-shadow: 0 1px 2px 0 var(--opacity-neutral-darkest-5),
+      inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2),
+      inset 0 0 0 1px var(--opacity-neutral-darkest-15),
+      inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
+      inset 0 32px 24px 0 var(--opacity-white-5);
+    background: var(--color-affair);
     cursor: pointer;
     transition: background-color 0.3s;
     margin-right: auto;
     margin-left: auto;
+    border-radius: 12px;
+    padding: 10px 24px;
+    width: 177px;
+    height: 47px;
   }
 
   .feedback-submit-btn:hover {
-    background-color: #6a0dad;
+    background: var(--opacity-white-10);
+    opacity: 0.8;
   }
   .feedback-slider {
     color: #fff;
@@ -119,6 +129,9 @@
   .star-on-png {
     color: #8a2be2;
   }
+  .feedback-text {
+    max-width: 284px;
+  }
 }
 
 @media only screen and (max-width: 767px) {
@@ -131,16 +144,44 @@
 @media only screen and (min-width: 768px) {
   .feedback-prev-btn,
   .feedback-next-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     cursor: pointer;
     transition: background-color 0.3s;
     border: 1px solid var(--opacity-white-100);
     padding: 12px;
-    width: 48px;
-    height: 48px;
     background: transparent;
     -webkit-text-fill-color: aliceblue;
+  }
+  .swiper-button-prev:after {
+    content: none !important;
+  }
+  .swiper-button-next:after {
+    content: none !important;
+  }
+
+  .feedback-text {
+    max-width: 516px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .feedback-text {
+    max-width: 868px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    border-radius: 10% !important;
+    width: 48px !important;
+    height: 48px !important;
+
+    outline: 1px solid #fff !important;
+  }
+
+  .swiper-button-prev svg,
+  .swiper-button-next svg {
+    width: 14px !important;
+    height: 14px !important;
   }
 }
