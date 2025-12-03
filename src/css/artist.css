@@ -78,6 +78,7 @@ body {
         padding: 4px 10px;
         width: 103px;
         height: 32px;
+        margin-right: 16px;
 
         font-family: var(--font-family);
         font-weight: 600;
