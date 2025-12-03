@@ -96,7 +96,7 @@
 
 .filters-panel-content {
   padding: 16px;
-  background: var(--color-black);
+  background: var(--color-neutral-darker);
   border: 1px solid var(--opacity-white-20);
   border-radius: 12px;
   display: flex;
