@@ -111,7 +111,6 @@
   height: 24px;
 }
 
-/* ===== MEDIA QUERIES ===== */
 @media (min-width: 768px) {
   .about-container {
     gap: 24px;
