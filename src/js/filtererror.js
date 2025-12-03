@@ -4,8 +4,8 @@ import {
   showArtistsLoader,
   hideArtistsLoader,
   clearArtistsList,
-  hideArtistsLoadMoreButton,
 } from './artisterror';
+import { renderPagination } from './artist';
 
 const BASE_URL = 'https://sound-wave.b.goit.study';
 const PER_PAGE = 8;
@@ -128,53 +128,49 @@ async function fetchArtists(page = 1) {
     params.genre = selectedGenre;
   }
 
+  if (searchQuery) {
+    params.name = searchQuery;
+  }
+
+  if (sortOrder) {
+    params.sortName = sortOrder === 'name_asc' ? 'asc' : 'desc';
+  }
+
   try {
     const response = await axios.get(`${BASE_URL}/api/artists`, { params });
     const data = response.data;
-    let artists = data.artists || [];
+    const artists = data.artists || [];
     const totalArtists = data.totalArtists || 0;
-
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
-      artists = artists.filter(artist => {
-        const name = (artist.strArtist || '').toLowerCase();
-        return name.includes(query);
-      });
-    }
-
-    if (sortOrder && artists.length > 0) {
-      artists.sort((a, b) => {
-        const nameA = (a.strArtist || '').toLowerCase();
-        const nameB = (b.strArtist || '').toLowerCase();
-        return sortOrder === 'name_asc'
-          ? nameA.localeCompare(nameB)
-          : nameB.localeCompare(nameA);
-      });
-    }
-
-    const filteredTotal = searchQuery ? artists.length : totalArtists;
-    totalPages = Math.ceil(filteredTotal / PER_PAGE);
+    totalPages = Math.ceil(totalArtists / PER_PAGE);
     currentPage = page;
 
     clearArtistsList();
+
+    const paginationEl = document.querySelector('.pagination');
 
     if (artists.length === 0 && page === 1) {
       if (elements.emptyState) {
         elements.emptyState.classList.remove('is-hidden');
       }
-      hideArtistsLoadMoreButton();
+      if (paginationEl) {
+        paginationEl.innerHTML = '';
+      }
     } else {
       createArtistCards(artists);
+      renderPagination(page, totalPages);
     }
 
-    return { artists, totalArtists: filteredTotal };
+    return { artists, totalArtists };
   } catch (error) {
     console.error('Error fetching artists:', error);
     clearArtistsList();
     if (elements.emptyState) {
       elements.emptyState.classList.remove('is-hidden');
     }
-    hideArtistsLoadMoreButton();
+    const paginationEl = document.querySelector('.pagination');
+    if (paginationEl) {
+      paginationEl.innerHTML = '';
+    }
     return { artists: [], totalArtists: 0 };
   } finally {
     hideArtistsLoader();

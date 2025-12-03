@@ -5,10 +5,9 @@ import {
   createArtistCards,
   showArtistsLoader,
   hideArtistsLoader,
-  showArtistsLoadMoreButton,
-  hideArtistsLoadMoreButton,
   clearArtistsList,
 } from './artisterror';
+import { fetchArtists as fetchFilteredArtists } from './filtererror';
 
 const BASE_URL = 'https://sound-wave.b.goit.study';
 const PER_PAGE = 8;
@@ -67,7 +66,7 @@ async function fetchArtists(page = 1, bool = false) {
   }
 }
 
-fetchArtists();
+// Инициализация теперь в filtererror.js
 
 const paginationEl = document.querySelector('.pagination');
 
@@ -133,5 +132,6 @@ paginationEl.addEventListener('click', (e) => {
     const page = Number(btn.dataset.page);
     if (isNaN(page)) return;
 
-    fetchArtists(page, true);
+    fetchFilteredArtists(page);
+    document.querySelector('.section-subtitle').scrollIntoView({ behavior: 'smooth' });
 });
