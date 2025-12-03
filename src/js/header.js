@@ -5,6 +5,7 @@ const refs = {
   mobileLinks: document.querySelectorAll('.header-mobile-nav-link'),
   menuLogoLink: document.querySelector('.menu-drive .header-link-logo'),
   desktopLinks: document.querySelectorAll('.header-list a'),
+  headerNav: document.querySelector('.header-list'),
 };
 
 const toggleMenu = () => {
@@ -38,5 +39,15 @@ if (refs.desktopLinks.length > 0) {
       });
       event.currentTarget.classList.add('is-active');
     });
+  });
+
+  document.addEventListener('click', function (event) {
+    const clickedInsideNav = refs.headerNav.contains(event.target);
+
+    if (!clickedInsideNav) {
+      refs.desktopLinks.forEach(link => {
+        link.classList.remove('is-active');
+      });
+    }
   });
 }
