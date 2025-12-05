@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/bcon_78_Vonels/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ArtistHub</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css"
+      integrity="sha512-q6WgHqiHlKyOqslT/lgBgodhd03Wp4BEqKeW6nNtlOY4quzyG3VoQKFrieaCeSnuVseNKRGpGeDU3qPmabCANg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,700;1,700&family=IBM+Plex+Sans:ital,wdth,wght@0,75..100,100..700;1,75..100,100..700&family=Roboto:ital,wght@0,700;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="/bcon_78_Vonels/index.js"></script>
+    <link rel="modulepreload" crossorigin href="/bcon_78_Vonels/assets/vendor-4ycomzgc.js">
+    <link rel="stylesheet" crossorigin href="/bcon_78_Vonels/assets/vendor-DnGaGgwy.css">
+    <link rel="stylesheet" crossorigin href="/bcon_78_Vonels/assets/index-DZ_fLSdz.css">
+  </head>
+  <body>
+    <!-- fff -->
+    <header class="header" id="header">
+  <div class="container header-container">
+    <nav class="header-page-nav">
+      <a class="header-link-logo" href="./index.html">
+        <svg class="header-logo-svg" width="119" height="51">
+          <use href="/bcon_78_Vonels/assets/sprite-D7DqdrPg.svg#icon-logotext"></use>
+        </svg>
+      </a>
+      <ul class="header-list">
+        <li class="header-list-item">
+          <a class="header-nav-link" href="#artists">
+            <span class="link-text">Artists</span>
+
+            <svg class="link-icon" width="20" height="20">
+              <use href="/bcon_78_Vonels/assets/sprite-D7DqdrPg.svg#icon-microphone"></use>
+            </svg>
+          </a>
+        </li>
+        <li class="header-list-item">
+          <a class="header-nav-link" href="#about">
+            <span class="link-text">About Us</span>
+
+            <svg class="link-icon" width="20" height="20">
+              <use href="/bcon_78_Vonels/assets/sprite-D7DqdrPg.svg#icon-Comment"></use>
+            </svg>
+          </a>
+        </li>
+        <li class="header-list-item">
+          <a class="header-nav-link" href="#feedback">
+            <span class="link-text">Reviews</span>
+
+            <svg class="link-icon" width="20" height="20">
+              <use href="/bcon_78_Vonels/assets/sprite-D7DqdrPg.svg#icon-Pen"></use>
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <button class="header-button-menu" type="button">
+      <svg class="header-burger-svg" width="16" height="12">
+        <use href="/bcon_78_Vonels/assets/sprite-D7DqdrPg.svg#icon-burger-menu" />
+      </svg>
+    </button>
+  </div>
+</header>
+<div class="menu-drive">
+  <div class="menu-drive-mobile container">
+    <div class="menu-drive-top-bar">
+      <a class="header-link-logo" href="#hero">
+        <svg class="header-logo-svg" width="119" height="51">
+          <use href="/bcon_78_Vonels/assets/sprite-D7DqdrPg.svg#icon-logotext"></use>
+        </svg>
+      </a>
+      <button type="button" class="button-close">
+        <svg class="svg-close-btn" width="12" height="12">
+          <use href="/bcon_78_Vonels/assets/sprite-D7DqdrPg.svg#icon-close"></use>
+        </svg>
+      </button>
+    </div>
+    <nav class="header-mobile-nav">
+      <ul class="header-mobile-menu-list">
+        <li class="header-mobile-menu-list-item">
+          <a class="header-mobile-nav-link" href="#artists">Artists</a>
+        </li>
+        <li class="header-mobile-menu-list-item">
+          <a class="header-mobile-nav-link" href="#about">About Us</a>
+        </li>
+        <li class="header-mobile-menu-list-item">
+          <a class="header-mobile-nav-link" href="#feedback">Reviews</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+
+    <main>
+      <section class="hero-section container">
+  <div class="hero-content">
+    <h1 class="hero-title">Discover Your Next Favorite Artist Today</h1>
+
+    <p class="hero-text">
+      Dive into a world of music discoveries with ArtistsHub – your personal
+      guide to the boundless universe of sound. Explore, filter, and learn about
+      your favorite artists all in one place.
+    </p>
+
+    <a class="hero-link" href="#artists">
+      Explore Artists
+      <svg class="hero-icon" height="20" width="15">
+        <use href="/bcon_78_Vonels/assets/sprite-D7DqdrPg.svg#icon-hero"></use>
+      </svg>
+    </a>
+  </div>
+
+  <div class="hero-images">
+    <div class="hero-images-row">
+      <div class="col-left" id="colLeft"></div>
+      <div class="col-right" id="colRight"></div>
+    </div>
+  </div>
+
+</section>
+
+      <section class="artist-section" id="artists">
+  <div class="container">
+    <h2 class="section-title">Artists</h2>
+    <h3 class="section-subtitle">Explore Your New Favorite Artists</h3>
+
+    <div class="filters-section filters-mobile">
+      <div class="filters-mobile-header">
+        <span class="filters-mobile-title">Filters</span>
+        <button type="button" class="filters-toggle-btn">
+          <span>Search and Filters</span>
+          <svg class="filters-toggle-icon" width="16" height="16">
+            <use href="/bcon_78_Vonels/assets/sprite-D7DqdrPg.svg#icon-listdamp"></use>
+          </svg>
+        </button>
+      </div>
+
+      <div class="filters-panel">
+        <div class="filters-panel-content">
+          <div class="search-wrapper">
+            <svg class="search-icon" width="20" height="20">
+              <use href="/bcon_78_Vonels/assets/sprite-D7DqdrPg.svg#icon-search"></use>
+            </svg>
+            <input
+              type="text"
+              class="search-input"
+              placeholder="Search"
+              id="artist-search"
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="filter-group">
+            <button
+              type="button"
+              class="filter-group-header"
+              data-filter="sort"
+            >
+              <span class="filter-group-label">Sorting</span>
+              <svg class="filter-group-icon" width="16" height="16">
+                <use href="/bcon_78_Vonels/assets/sprite-D7DqdrPg.svg#icon-listdamp"></use>
+              </svg>
+            </button>
+            <div class="filter-group-content is-hidden">
+              <ul class="sort-list">
+                <li class="sort-item" data-sort="">
+                  <button type="button" class="sort-option-btn">Default</button>
+                </li>
+                <li class="sort-item" data-sort="name_asc">
+                  <button type="button" class="sort-option-btn">A-Z</button>
+                </li>
+                <li class="sort-item" data-sort="name_desc">
+                  <button type="button" class="sort-option-btn">Z-A</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <button
+              type="button"
+              class="filter-group-header"
+              data-filter="genre"
+            >
+              <span class="filter-group-label">Genre</span>
+              <svg class="filter-group-icon" width="16" height="16">
+                <use href="/bcon_78_Vonels/assets/sprite-D7DqdrPg.svg#icon-listdamp"></use>
+              </svg>
+            </button>
+            <div class="filter-group-content is-hidden">
+              <ul class="genre-list genre-dropdown-list"></ul>
+            </div>
+          </div>
+
+          <div class="filters-panel-footer">
+            <button type="button" class="reset-btn">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="filters-desktop">
+      <div class="filters-row">
+        <div class="search-wrapper">
+          <svg class="search-icon" width="20" height="20">
+            <use href="/bcon_78_Vonels/assets/sprite-D7DqdrPg.svg#icon-search"></use>
+          </svg>
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Search"
+            id="artist-search-desktop"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="filter-dropdown">
+          <button
+            type="button"
+            class="filter-dropdown-btn"
+            data-filter="sort-desktop"
+          >
+            <span class="filter-dropdown-label">Sorting</span>
+            <svg class="filter-dropdown-icon" width="16" height="16">
+              <use href="/bcon_78_Vonels/assets/sprite-D7DqdrPg.svg#icon-listdamp"></use>
+            </svg>
+          </button>
+          <div class="filter-dropdown-content">
+            <ul class="filter-options-list sort-options-desktop">
+              <li class="filter-option-item active" data-sort="">Default</li>
+              <li class="filter-option-item" data-sort="name_asc">A-Z</li>
+              <li class="filter-option-item" data-sort="name_desc">Z-A</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="filter-dropdown">
+          <button
+            type="button"
+            class="filter-dropdown-btn"
+            data-filter="genre-desktop"
+          >
+            <span class="filter-dropdown-label">Genre</span>
+            <svg class="filter-dropdown-icon" width="16" height="16">
+              <use href="/bcon_78_Vonels/assets/sprite-D7DqdrPg.svg#icon-listdamp"></use>
+            </svg>
+          </button>
+          <div class="filter-dropdown-content">
+            <ul class="filter-options-list genre-options-desktop"></ul>
+          </div>
+        </div>
+
+        <button type="button" class="reset-btn">Reset</button>
+      </div>
+    </div>
+
+    <div class="artists-content-wrapper">
+      <div class="artists-main-content">
+        <div class="empty-state is-hidden">
+          <div class="empty-state-icon">
+            <svg width="34" height="34">
+              <use href="/bcon_78_Vonels/assets/sprite-D7DqdrPg.svg#icon-filter-error"></use>
+            </svg>
+          </div>
+          <h3 class="empty-state-title">Silence on the stage...</h3>
+          <p class="empty-state-text">
+            Looks like no artists match your filters.<br />
+            Try changing them or hit "Reset Filters" to bring back the beat.
+          </p>
+          <button type="button" class="reset-filters-btn">Reset filters</button>
+        </div>
+
+        <ul class="artists-list"></ul>
+
+        <span class="artists-loader is-hidden">Loading Artists...</span>
+        <div class="pagination"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+      <section class="modal-window-artists">
+  <div class="modal-overlay">
+    <span class="loader"></span>
+    <div class="modal"></div>
+  </div>
+</section>
+
+      <section id="about">
+  <div class="container about-container">
+    <picture class="about-picture">
+      <source
+        srcset="/bcon_78_Vonels/assets/team@1x-JKnB0rra.webp 1x, /bcon_78_Vonels/assets/team@2x-CgqcALgG.webp 2x"
+        media="(min-width: 1440px)"
+        type="image/webp"
+      />
+      <source
+        srcset="/bcon_78_Vonels/assets/teamphone@1x-BeyOGZUH.webp 1x, /bcon_78_Vonels/assets/teamphone@2x-DUItzXHi.webp 2x"
+        media="(min-width: 768px)"
+        type="image/webp"
+      />
+      <source
+        srcset="/bcon_78_Vonels/assets/teamphone@1x-BeyOGZUH.webp 1x, /bcon_78_Vonels/assets/teamphone@2x-DUItzXHi.webp 2x"
+        type="image/webp"
+      />
+      <img src="./img/team@1x.jpg" alt="team-photo" />
+    </picture>
+
+    <div class="container-about-inf">
+      <svg class="svg-icon-about">
+        <use href="/bcon_78_Vonels/assets/sprite-D7DqdrPg.svg#icon-logo"></use>
+      </svg>
+
+      <h1 class="about-title">About ArtistsHub</h1>
+
+      <p class="about-text">
+        At ArtistsHub, our mission is to connect music lovers with the artists
+        they adore. We strive to create a vibrant community where discovering
+        new music is as enjoyable as listening to it.
+      </p>
+
+      <button class="read-more-about">Read more</button>
+    </div>
+  </div>
+
+  <!-- ===== MODAL ===== -->
+  <div class="read-more-modal">
+    <div class="modal-content">
+      <button class="close-button-about" aria-label="Close">
+        <svg class="close-modal-about">
+          <use
+            class="close-icon"
+            href="/bcon_78_Vonels/assets/window-close-symbolic-svgrepo-com-CKjU7xnn.svg#close"
+          ></use>
+        </svg>
+      </button>
+      <h1>About us</h1>
+      <p>
+        At ArtistsHub, our mission is to connect music lovers with the artists
+        they adore. We strive to create a vibrant community where discovering
+        new music is as enjoyable as listening to it. ArtistsHub is more than
+        just a platform — it’s a place where creativity meets connection. We
+        bring together emerging talents, established musicians, and fans from
+        all over the world. Whether you’re looking for your next favorite
+        artist, exploring fresh genres, or supporting creators directly,
+        ArtistsHub makes the experience smooth and inspiring. Our team is
+        passionate about empowering artists by giving them the tools they need
+        to grow, share their stories, and be heard. At the same time, we help
+        listeners dive deeper into the world of music through personalized
+        recommendations, exclusive content, and a community-driven approach. We
+        believe that music has the power to unite people, spark emotions, and
+        shape culture — and our goal is to build a space that celebrates all of
+        that. Here, every listener can become a supporter, and every artist can
+        find their audience.
+      </p>
+    </div>
+  </div>
+</section>
+
+      <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
+<section class="feedback-section container" id="feedback">
+  <h2 class="is-hidden">Feedbacks our visitors</h2>
+
+  <div class="swiper feedback-slider">
+    <div class="swiper-wrapper"></div>
+
+    <div class="slider-navigation-wrapper">
+      <button
+        type="button"
+        class="swiper-button-prev feedback-prev-btn"
+        aria-label="Попередній відгук"
+      >
+        <svg width="15" heigth="15">
+          <use href="/bcon_78_Vonels/assets/sprite-D7DqdrPg.svg#icon-left"></use>
+        </svg>
+      </button>
+
+      <div class="swiper-pagination feedback-pagination"></div>
+
+      <button
+        type="button"
+        class="swiper-button-next feedback-next-btn"
+        aria-label="Наступний відгук"
+      >
+        <svg width="20" hight="20">
+          <use href="/bcon_78_Vonels/assets/sprite-D7DqdrPg.svg#icon-rigth"></use>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <button type="button" class="feedback-submit-btn">Leave feedback</button>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/raty-js@3.1.0/lib/jquery.raty.css"
+  />
+  <script src="https://cdn.jsdelivr.net/npm/raty-js@3.1.0/lib/jquery.raty.js"></script>
+</section>
+
+      <section class="submit-feedback ">
+    <div class="submit-modal ">
+        <button class="submit-button_modal" type="submit">
+            <svg class="button-close_icon" width="15" height="15">
+                <use href="/bcon_78_Vonels/assets/sprite-D7DqdrPg.svg#icon-close"></use>
+            </svg>
+        </button>
+        <h2 class="submit-title">Submit feedback</h2>
+        <form class="submit-form">
+            <div class="form-group">
+                <label for="username" class="submit_form-label">Name</label>
+                <input id="username" name="username" type="text" placeholder="Emily">
+            </div>
+            <div class="form-group">
+                <label for="message" class="submit_form-label">Message</label>
+                <textarea id="message" name="message" type="text" placeholder="Type your message..."></textarea>
+            </div>
+            <div class="rating-group">
+                <div id="user-rating-input"></div>
+                <input type="hidden" id="rating-score" name="rating-score" value="0">
+            </div>
+            <button type="submit" class="submit-feedback_button">Submit</button>
+        </form>
+    </div>
+</section>
+<link rel="stylesheet" href="jquery.raty.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/raty-js@3.1.0/lib/jquery.raty.js"></script>
+
+    </main>
+    <footer>
+  <section class="container footer">
+    <div class="footer-content">
+      <a class="footer-content-logo" href="./index.html">
+        <svg width="106" height="30">
+          <use href="/bcon_78_Vonels/assets/sprite-D7DqdrPg.svg#icon-logotext"></use>
+        </svg>
+      </a>
+      <ul class="footer-content-menu-links">
+        <li>
+          <a class="footer-content-item" href="#artists">Artists</a>
+        </li>
+        <li>
+          <a class="footer-content-item" href="#about">About us</a>
+        </li>
+        <li>
+          <a class="footer-content-item" href="#feedback">Reviews</a>
+        </li>
+      </ul>
+    </div>
+    <div class="footer-end">
+      <ul class="footer-end-social-links">
+        <li>
+          <a
+            class="footer-end-social-item"
+            href="https://www.instagram.com/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <svg class="footer-social-icon" width="40" height="40">
+              <use href="/bcon_78_Vonels/assets/sprite-D7DqdrPg.svg#icon-Instagram"></use>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a
+            class="footer-end-social-item"
+            href="https://www.facebook.com/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <svg class="footer-social-icon" width="40" height="40">
+              <use href="/bcon_78_Vonels/assets/sprite-D7DqdrPg.svg#icon-Vector"></use>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a
+            class="footer-end-social-item"
+            href="https://www.youtube.com/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <svg class="footer-social-icon" width="40" height="40">
+              <use href="/bcon_78_Vonels/assets/sprite-D7DqdrPg.svg#icon-YouTube"></use>
+            </svg>
+          </a>
+        </li>
+      </ul>
+      <p class="footer-end-text">© 2025 ArtistsHub. All rights reserved.</p>
+    </div>
+  </section>
+</footer>
+
+  </body>
+</html>
