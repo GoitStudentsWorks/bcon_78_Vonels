@@ -26,11 +26,10 @@ ArtistHub — це веб-платформа,
 - Figma
 - Trello
 
-Та бібліотекі 
--Swiper
--Axios
--Raty-JavaScript
--
+Та бібліотеки
+- Swiper
+- Axios
+- Raty-JavaScript
 
 
 ## Як запустити / розгорнути проєкт
@@ -42,6 +41,9 @@ https://vonels.github.io/ProjectGroup/
 ### Варіант 2: запуск локально
 
  Клонувати репозиторій:
-   ```bash
-   git clone https://github.com/Vonels/ProjectGroup
+  ```bash
+    git clone https://github.com/Vonels/ProjectGroup
+    cd ./ProjectGroup
+    npm install && npm run dev
+  ```
 
