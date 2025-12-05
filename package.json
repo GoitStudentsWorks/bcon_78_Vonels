@@ -1,11 +1,11 @@
 {
-  "name": "vanilla-app-template",
+  "name": "bcon_78_Vonels",
   "private": true,
   "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --base=/ProjectGroup/",
+    "build": "vite build --base=/bcon_78_Vonels/",
     "preview": "vite preview"
   },
   "devDependencies": {
